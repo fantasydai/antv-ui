@@ -1,13 +1,14 @@
 <template>
   <transition name="d-toast">
     <div :class="['d-toast-mask',!mask && 'd-toast-nomask']" v-if="visible">
-      <div class="d-toast-content" :class="[icon&&'d-toast-content-icon']">
-        <div v-if="icon" class="icons">
-          <span v-if="icon === 'loading'"  class="loading-icon">
+      <div class="d-toast-content" :class="[icon&&'d-toast-content-icon',position && 'd-toast-content-'+position]">
+        <span class="icons" v-if="icon">
+          <span v-if="icon === 'loading'"  class="loading-icon icon">
             <i class="d-icon-loading"></i>
           </span>
           <i v-else class="icon" :class="'d-icon-' + icon"></i>
-        </div>
+        </span>
+        <img v-if="image" class="image" :src="image" alt="image">
         <span v-html="content"></span>
       </div>
     </div>
@@ -79,20 +80,38 @@ export default {
     color: @color-text-base-inverse;
 
     .icons{
-      font-size: 28*@unit !important;
-      .loading-icon{
-        font-size: 28*@unit !important;
+      .icon{
         display: block;
-        padding-left: 2px;
-        padding-top: 2px;
-
-        animation: loading-rotate 1.2s linear infinite;
+        margin: @h-spacing-md 0;
+        font-size: 40*@unit !important;
+      }
+      .loading-icon{
+        .d-icon-loading{
+          display: block;
+          width: 32px;
+          height: 32px;
+          margin: auto;
+          font-size: 28*@unit !important;
+          animation: loading-rotate 1.4s linear infinite;
+        }
       }
     }
+    .image{
+      display: block;
+      margin: @h-spacing-md auto;
+      width: 32px;
+      height: 32px;
+    }
+  }
+  .d-toast-content-top{
+    top: 10%;
+  }
+  .d-toast-content-bottom{
+    top: 90%;
   }
 }
 .d-toast-nomask{
-  z-index: -1000;
+  pointer-events: none;
 }
 .d-toast-enter-active, .d-toast-leave-active {
   transition: opacity .5s

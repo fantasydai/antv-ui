@@ -43,7 +43,7 @@ const Toast = (options = {}) => {
   toast.position = options.position || 'middle'
   toast.icon = options.icon || ''
   toast.image = options.image || ''
-  toast.mask = options.mask
+  toast.mask = options.mask === undefined ? true : options.mask
 
   document.body.appendChild(toast.$el)
   toast.visible = true
