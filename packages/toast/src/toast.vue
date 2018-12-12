@@ -16,6 +16,7 @@
 </template>
 <script>
 export default {
+  name:'d-toast',
   props: {
     content: {
       default: '提示',
