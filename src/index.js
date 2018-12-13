@@ -4,6 +4,7 @@ import CheckboxItem from '../packages/checkbox/index'
 import CheckList from '../packages/checklist/index'
 import Switch from '../packages/switch/index'
 import Toast from '../packages/toast/index'
+import Modal from '../packages/modal/index'
 
 import './assets/icon/iconfont.css'
 
@@ -21,6 +22,7 @@ const install = function (Vue) {
   Vue.component(Switch.name, Switch)
 
   Vue.$Toast = Vue.prototype.$Toast = Toast
+  Vue.$Modal = Vue.prototype.$Modal = Modal
 }
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)

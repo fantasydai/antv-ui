@@ -3,6 +3,7 @@ import List from './pages/list.vue'
 import Checkbox from './pages/checkbox.vue'
 import Switch from './pages/switch.vue'
 import Toast from './pages/toast.vue'
+import Modal from './pages/modal.vue'
 export default {
   routes: [
     {
@@ -27,6 +28,10 @@ export default {
       path: '/toast',
       name: 'Toast',
       component: Toast
+    }, {
+      path: '/modal',
+      name: 'Modal',
+      component: Modal
     }
   ]
 }

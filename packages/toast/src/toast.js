@@ -37,7 +37,6 @@ const Toast = (options = {}) => {
 
   let toast = _init()
   toastList.push(toast)
-  console.log(toastList)
   clearTimeout(toast.timer)
   toast.content = options.content || ''
   toast.position = options.position || 'middle'
@@ -47,7 +46,6 @@ const Toast = (options = {}) => {
 
   document.body.appendChild(toast.$el)
   toast.visible = true
-  console.log(duration)
   if (duration > 0) {
     toast.timer = setTimeout(() => {
       toast.close()
