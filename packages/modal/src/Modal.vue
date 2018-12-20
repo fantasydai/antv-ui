@@ -3,16 +3,16 @@
     <div class="d-modal-mask"></div>
     <div class="d-modal-wrap">
        <div class="d-modal-content">
-        <div class="d-modal-header" v-if="title">
-          <div class="d-modal-title">{{title}}</div>
+        <div class="d-modal-header">
+          <div class="d-modal-title" v-if="title">{{title}}</div>
         </div>
-        <div class="d-modal-body" v-if="message">
-          <div class="d-modal-body-content" v-html="message"></div>
+        <div class="d-modal-body">
+          <div class="d-modal-body-content" v-if="message" v-html="message"></div>
           <slot name="message"></slot>
         </div>
         <div class="d-modal-footer">
           <div :class="['d-modal-buttons',footer.length === 2 ? 'd-modal-buttons-flex' : 'd-modal-buttons-normal']">
-            <a class="d-modal-button" v-for="(item,index) in footer" :key="index" role="button" @click="item.onPress || onPress">{{item.text}}</a>
+            <a class="d-modal-button" v-for="(item,index) in footer" :key="index" role="button" @click="onPress(item)">{{item.text}}</a>
           </div>
         </div>
       </div>
@@ -34,12 +34,24 @@ export default {
     },
     footer: {
       type: Array,
-      default: ()=>{return [{text:'确定',onPress:()=>{}}]}
+      default: ()=>{return [{text:'确定',onPress:()=>{console.log(222)}}]}
+    }
+  },
+  created(){
+    console.log(this.title)
+  },
+  watch:{
+    title:function(val){
+      console.log(val)
     }
   },
   methods: {
-    onPress(event){
-      console.log(event)
+    onPress(item){
+      if(item.onPress){
+        item.onPress()
+      } else {
+        this.visible = false
+      }
     }
   }
 }
@@ -59,6 +71,71 @@ export default {
     height: 100%;
     z-index: @modal-zindex;
     background-color: @fill-mask;
+  }
+  &-wrap{
+    position: fixed;
+    overflow: auto;
+    height: 100%;
+    z-index: @modal-zindex;
+    -webkit-overflow-scrolling: touch;
+    outline: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+  &-content{
+    width: 270px;
+    position: relative;
+    background-color: @fill-base;
+    border: 0;
+    background-clip: padding-box;
+    text-align: center;
+    overflow: hidden;
+    border-radius: 7*@unit;
+    padding-top: 15*@unit;
+  }
+  &-header{
+    padding: 6px 15px 15px;
+  }
+  &-title{
+    margin: 0;
+    font-size: 18*@unit;
+    line-height: 1;
+    color: @color-text-base;
+    text-align: center;
+  }
+  &-body{
+    padding: 0 15*@unit 15*@unit;
+    font-size: 15*@unit;
+    color: @color-text-caption;
+    height: 100%;
+    line-height: 1.5;
+    overflow: auto;
+    &-content{
+      zoom: 1;
+      overflow: hidden;
+    }
+  }
+  &-button{
+    position: relative;
+    border-top: 1px solid #ddd;
+    box-sizing: border-box;
+    text-align: center;
+    text-decoration: none;
+    outline: none;
+    color: @color-primary;
+    font-size: 18*@unit;
+    height: 50*@unit;
+    line-height: 50*@unit;
+    display: block;
+    width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 }
 </style>

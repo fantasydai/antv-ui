@@ -18,7 +18,10 @@ export default {
   methods: {
     handleClick1(){
       console.log(this.$Modal)
-      let toast = this.$Modal.alert()
+      let toast = this.$Modal.alert({
+        title:'Title',
+        message:'test alert modal'
+      })
     },
     handleClick2(){
       this.$Toast({

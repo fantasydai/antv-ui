@@ -11,7 +11,12 @@ let defaultPorps = {
   closable: false,
   maskClosable: false,
   transparent: false,
-  footer: [{text: '我知道了', onPress: function () { this.visible = false }}],
+  footer: [{
+    text: '我知道了',
+    onPress: function () {
+      this.visible = false
+    }
+  }],
   onClose: () => {}
 }
 
@@ -19,17 +24,23 @@ const AlertModalConstructor = Vue.extend(ModalComponent)
 
 const modalQueue = []
 
-const init = (constructor, props) => {
+const init = (constructor, propsData) => {
   if (constructor) {
     return new constructor({
-      ...props
-    }).$mount(document.createElement('div'))
+      propsData,
+      el: document.createElement('div')
+    })
+    // new constructor({
+    //   ...props
+    // }).$mount(document.createElement('div'))
   }
 }
 
 const Modal = {
   alert (options = {}) {
-    const modal = init(AlertModalConstructor, defaultPorps)
+    let lastOptions = Object.assign(defaultPorps, options)
+    const modal = init(AlertModalConstructor, lastOptions)
+    console.log(modal)
     document.body.appendChild(modal.$el)
     modal.visible = true
   }
