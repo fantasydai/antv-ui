@@ -1,9 +1,9 @@
 <template>
   <section class="btn-wrap">
-    <d-button class="btn" @click="handleClick1">default icon</d-button>
+    <d-button class="btn" @click="handleClick1">alert modal</d-button>
     <d-button class="btn" @click="handleClick2">nomask icon</d-button>
-    <d-button class="btn" @click="handleClick3">toast success icon</d-button>
-    <d-button class="btn" @click="handleClick4">toast fail icon</d-button>
+    <d-button class="btn" @click="handleClick3">confirm toast</d-button>
+    <d-button class="btn" @click="handleClick4">more than two buttons</d-button>
     <d-button class="btn" @click="handleClick5">toast loading</d-button>
     <d-button class="btn" @click="handleClick6">toast image</d-button>
     <d-button class="btn" @click="handleClick7">top toast</d-button>
@@ -17,31 +17,35 @@ export default {
   name:'toast',
   methods: {
     handleClick1(){
-      console.log(this.$Modal)
-      let toast = this.$Modal.alert({
+      this.$Modal.alert({
         title:'Title',
         message:'test alert modal'
       })
     },
     handleClick2(){
-      this.$Toast({
-        content: 'Avada Kedavra',
-        duration: 1000,
-        mask:false
+      this.$Modal.alert({
+        title:'Title1',
+        message:'test alert modal111'
       })
     },
     handleClick3(){
+      this.$Modal.confirm({
+        title:'删除',
+        message:'确认删除?',
+        footer:[{text:'取消'},{text:'确定',onPress:this.onPress}]
+      })
+    },
+    onPress(){
       this.$Toast({
-        content: 'Avada Kedavra',
-        duration: 1000,
-        icon:'success'
+        content: '已删除',
+        duration:1000,
       })
     },
     handleClick4(){
-      this.$Toast({
-        content: 'Avada Kedavra',
-        duration:1000,
-        icon:'wrong'
+      this.$Modal.confirm({
+        title:'Confirm',
+        message:'More than two button',
+        footer:[{text:'Button1'},{text:'Button2'},{text:'Button3'}]
       })
     },
     handleClick5(){
