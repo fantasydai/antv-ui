@@ -65,8 +65,23 @@ const Modal = {
       document.body.appendChild(modal.$el)
     }
     modal.visible = true
+  },
+  prompt (options = {}) {
+    if (options.type === 'secure' && options.defaultValue) {
+      console.error('input 为 password 类型不支持默认值')
+      return
+    }
+    let lastOptions = Object.assign({ footer: [{ text: 'Cancel' }, { text: 'Submit' }], isprompt: true }, defaultPorps, options)
+    let modal
+    if (modalQueue.length) {
+      modal = getExistModal(lastOptions)
+    } else {
+      modal = init(ModalConstructor, lastOptions)
+      modalQueue.push(modal)
+      document.body.appendChild(modal.$el)
+    }
+    modal.visible = true
   }
-
 }
 
 export default Modal

@@ -10,6 +10,18 @@
           <div class="d-modal-body">
             <div class="d-modal-body-content" v-if="message" v-html="message"></div>
             <slot name="message"></slot>
+            <div class="d-modal-input-wrap" v-if="isprompt">
+              <div class="d-modal-input">
+                <label>
+                  <input :type="[type === 'secure'?'password':'text']" :placeholder="placeholder" :value="defaultValue">
+                </label>
+              </div>
+              <div class="d-modal-input" v-if="type==='login'">
+                <label>
+                  <input type="password">
+                </label>
+              </div>
+            </div>
           </div>
           <div class="d-modal-footer">
             <div :class="['d-modal-buttons',footer.length === 2 ? 'd-modal-buttons-flex' : 'd-modal-buttons-normal']">
@@ -30,6 +42,19 @@ export default {
     visible: Boolean,
     maskClosable: Boolean,
     transparent: Boolean,
+    isprompt:Boolean,
+    type:{
+      type:String,
+      default:'default'
+    },
+    placeholder:{
+      type:String,
+      default:''
+    },
+    defaultValue:{
+      type:[String,Number],
+      default:''
+    },
     onClose: {
       type: Function,
       default: ()=>{}
@@ -50,7 +75,7 @@ export default {
       } else {
         setTimeout(() => {
           this.visible = false
-        }, 200)
+        }, 100)
       }
     }
   }
@@ -58,9 +83,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
 @import '../../../src/style/default.less';
 @import '../../../src/style/var.less';
-
+@import '../../../src/style/reset.less';
 .d-modal{
   &-mask{
     position: fixed;
@@ -122,6 +148,50 @@ export default {
       overflow: hidden;
     }
   }
+  &-input-wrap{
+    margin-top: 9*@unit;
+    border-radius: 3*@unit;
+    position: relative;
+    &:after{
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 200%;
+      height: 200%;
+      border: 1px solid #ddd;/*px*/
+      border-radius: 6*@unit;
+      transform-origin: 0 0;
+      transform: scale(.5);
+      box-sizing: border-box;
+      pointer-events: none;
+      font-size: 100%;
+    }
+  }
+  &-input{
+    height: 36 * @unit;
+    line-height: @line-height-base;
+    &:nth-child(2){
+      position: relative;
+      .borderLine('top',@fill-tap,0,0,0,0);
+    }
+    input {
+      position: relative;
+      border: 0;
+      width: 98%;
+      height: 34 * @unit;
+      top: 1px;
+      box-sizing: border-box;
+      margin: 0;
+      font-size: 100%;
+      &::placeholder {
+        font-size: @font-size-base;
+        color: #ccc;
+        padding-left: @h-spacing-md;
+      }
+    }
+  }
+
   &-buttons-flex{
     display: flex;
     align-items: center;

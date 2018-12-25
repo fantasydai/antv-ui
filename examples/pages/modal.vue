@@ -4,9 +4,9 @@
     <d-button class="btn" @click="handleClick2">nomask icon</d-button>
     <d-button class="btn" @click="handleClick3">confirm toast</d-button>
     <d-button class="btn" @click="handleClick4">more than two buttons</d-button>
-    <d-button class="btn" @click="handleClick5">toast loading</d-button>
-    <d-button class="btn" @click="handleClick6">toast image</d-button>
-    <d-button class="btn" @click="handleClick7">top toast</d-button>
+    <d-button class="btn" @click="handleClick5">prompt modal</d-button>
+    <d-button class="btn" @click="handleClick6">secure modal</d-button>
+    <d-button class="btn" @click="handleClick7">login modal</d-button>
     <d-button class="btn" @click="handleClick8">bottom toast</d-button>
   </section>
 
@@ -49,24 +49,30 @@ export default {
       })
     },
     handleClick5(){
-      this.$Toast({
-        content: 'loading....',
-        duration: 1000,
-        icon:'loading'
+      this.$Modal.prompt({
+        title:'defaultValue',
+        message:'defaultValue for prompt',
+        type:'default',
+        placeholder:'tap you number',
+        // defaultValue:100
       })
     },
     handleClick6(){
-      this.$Toast({
-        content: 'toast image',
-        duration: 1000,
-        image:'https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png'
+      this.$Modal.prompt({
+        title:'Password',
+        message:'password for modal',
+        type:'secure',
+        // placeholder:'input your password',
+        // defaultValue:100
       })
     },
     handleClick7(){
-      this.$Toast({
-        content: 'loading....',
-        duration: 1000,
-        position: 'top'
+      this.$Modal.prompt({
+        title:'Login',
+        message:'Input login information',
+        type:'login',
+        // placeholder:'input your password',
+        // defaultValue:100
       })
     },
     handleClick8(){
