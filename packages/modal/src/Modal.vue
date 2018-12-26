@@ -13,12 +13,12 @@
             <div class="d-modal-input-wrap" v-if="isprompt">
               <div class="d-modal-input">
                 <label>
-                  <input :type="[type === 'secure'?'password':'text']" :placeholder="placeholder" :value="defaultValue">
+                  <input :type="[type === 'secure'?'password':'text']" :placeholder="typeof placeholders === 'string'?placeholders : placeholders[0]" :value="defaultValue">
                 </label>
               </div>
               <div class="d-modal-input" v-if="type==='login'">
                 <label>
-                  <input type="password">
+                  <input type="password" :placeholder="typeof placeholders === 'string'? '' : placeholders[1]">
                 </label>
               </div>
             </div>
@@ -34,6 +34,7 @@
   </div>
 </template>
 <script>
+import {isPromise} from '../../../src/utils/utils'
 export default {
   name: 'd-modal',
   props: {
@@ -47,8 +48,8 @@ export default {
       type:String,
       default:'default'
     },
-    placeholder:{
-      type:String,
+    placeholders:{
+      type:[String,Array],
       default:''
     },
     defaultValue:{
@@ -67,17 +68,26 @@ export default {
   methods: {
     onPress(item){
       if(item.onPress){
-        this.visible = false
-        setTimeout(() => {
+        console.log(item.onPress.then)
+        if(isPromise(item.onPress)){
+          console.log(item.onPress.then)
+          item.onPress.then(()=>{
+            console.log(222)
+            this.visible = false
+          })
           item.onPress()
-        }, 100)
-
+        }  else {
+          console.log(222)
+          setTimeout(() => {
+            item.onPress()
+          }, 100)
+        }
       } else {
         setTimeout(() => {
           this.visible = false
         }, 100)
       }
-    }
+    },
   }
 }
 </script>

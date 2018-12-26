@@ -2,8 +2,9 @@
   <section class="btn-wrap">
     <d-button class="btn" @click="handleClick1">alert modal</d-button>
     <d-button class="btn" @click="handleClick2">nomask icon</d-button>
-    <d-button class="btn" @click="handleClick3">confirm toast</d-button>
+    <d-button class="btn" @click="handleClick3">confirm modal</d-button>
     <d-button class="btn" @click="handleClick4">more than two buttons</d-button>
+     <d-button class="btn" @click="handleClick9">promise modal</d-button>
     <d-button class="btn" @click="handleClick5">prompt modal</d-button>
     <d-button class="btn" @click="handleClick6">secure modal</d-button>
     <d-button class="btn" @click="handleClick7">login modal</d-button>
@@ -53,7 +54,7 @@ export default {
         title:'defaultValue',
         message:'defaultValue for prompt',
         type:'default',
-        placeholder:'tap you number',
+        placeholders:'tap you number',
         // defaultValue:100
       })
     },
@@ -71,7 +72,7 @@ export default {
         title:'Login',
         message:'Input login information',
         type:'login',
-        // placeholder:'input your password',
+        placeholders:['input your username','input your password'],
         // defaultValue:100
       })
     },
@@ -80,6 +81,22 @@ export default {
         content: 'loading....',
         duration: 1000,
         position: 'bottom'
+      })
+    },
+    handleClick9(){
+      this.$Modal.confirm({
+        title:'删除',
+        message:'确认删除?',
+        footer:[{text:'取消'},{text:'确定',onPress:this.onPormisePress}]
+      })
+    },
+    onPormisePress(){
+      new Promise((resolve)=>{
+        this.$Toast({
+          content: 'promise press',
+          duration:1000,
+        })
+        setTimeout(resolve, 1000)
       })
     }
   }
