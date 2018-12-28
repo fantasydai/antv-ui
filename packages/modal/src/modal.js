@@ -21,9 +21,6 @@ const init = (constructor, propsData) => {
       propsData,
       el: document.createElement('div')
     })
-    // new constructor({
-    //   ...props
-    // }).$mount(document.createElement('div'))
   }
 }
 
