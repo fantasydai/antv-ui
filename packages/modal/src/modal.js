@@ -29,7 +29,15 @@ const init = (constructor, propsData) => {
 
 const getExistModal = (props) => {
   let modal = modalQueue[0]
+  if (modal.originProps) {
+    for (const prop in modal.originProps) {
+      if (modal.originProps.hasOwnProperty(prop) && modal[prop]) {
+        modal[prop] = undefined
+      }
+    }
+  }
   for (const prop in props) {
+    modal.originProps = props
     if (props.hasOwnProperty(prop)) {
       modal[prop] = props[prop]
     }
@@ -77,6 +85,7 @@ const Modal = {
       modal = getExistModal(lastOptions)
     } else {
       modal = init(ModalConstructor, lastOptions)
+      modal.originProps = lastOptions
       modalQueue.push(modal)
       document.body.appendChild(modal.$el)
     }

@@ -1,14 +1,15 @@
 <template>
   <section class="btn-wrap">
     <d-button class="btn" @click="handleClick1">alert modal</d-button>
-    <d-button class="btn" @click="handleClick2">nomask icon</d-button>
+    <d-button class="btn" @click="handleClick2">transparent mask modal</d-button>
+    <d-button class="btn" @click="handleClick10">no mask modal</d-button>
     <d-button class="btn" @click="handleClick3">confirm modal</d-button>
+    <d-button class="btn" @click="handleClick11">customized confirm modal</d-button>
     <d-button class="btn" @click="handleClick4">more than two buttons</d-button>
-     <d-button class="btn" @click="handleClick9">promise modal</d-button>
+    <d-button class="btn" @click="handleClick9">promise modal</d-button>
     <d-button class="btn" @click="handleClick5">prompt modal</d-button>
     <d-button class="btn" @click="handleClick6">secure modal</d-button>
     <d-button class="btn" @click="handleClick7">login modal</d-button>
-    <d-button class="btn" @click="handleClick8">bottom toast</d-button>
   </section>
 
 </template>
@@ -26,7 +27,8 @@ export default {
     handleClick2(){
       this.$Modal.alert({
         title:'Title1',
-        message:'test alert modal111'
+        message:'test alert modal111',
+        maskClosable:true
       })
     },
     handleClick3(){
@@ -90,8 +92,22 @@ export default {
         footer:[{text:'取消'},{text:'确定',onPress:this.onPormisePress}]
       })
     },
+    handleClick10(){
+      this.$Modal.alert({
+        title:'Title1',
+        message:'test alert modal111',
+        transparent: true
+      })
+    },
+    handleClick11(){
+      this.$Modal.confirm({
+        title:'删除',
+        message:'确认删除?',
+        footer:[{text:'取消',className:'cancel-btn'},{text:'确定',className:'confirm-btn',onPress:this.onPormisePress}]
+      })
+    },
     onPormisePress(){
-      new Promise((resolve)=>{
+      return new Promise((resolve)=>{
         this.$Toast({
           content: 'promise press',
           duration:1000,
@@ -111,5 +127,14 @@ export default {
     }
   }
 </style>
+<style>
+  .cancel-btn{
+    color: #f4333c !important;
+  }
+  .confirm-btn{
+    color: #6abf47 !important;
+  }
+</style>
+
 
 

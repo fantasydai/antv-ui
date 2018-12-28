@@ -1,9 +1,9 @@
 <template>
   <div class="d-modal">
-    <div class="d-modal-mask" v-if="visible"></div>
-    <div class="d-modal-wrap">
+    <div :class="['d-modal-mask',transparent && 'd-modal-mask-transparent']" v-if="visible" @click="handleMaskClick"></div>
+    <div :class="['d-modal-wrap',wrapClassName]">
       <transition name="d-bounce">
-        <div class="d-modal-content" v-if="visible">
+        <div :class="['d-modal-content',className]" v-if="visible">
           <div class="d-modal-header">
             <div class="d-modal-title" v-if="title">{{title}}</div>
           </div>
@@ -13,7 +13,7 @@
             <div class="d-modal-input-wrap" v-if="isprompt">
               <div class="d-modal-input">
                 <label>
-                  <input :type="[type === 'secure'?'password':'text']" :placeholder="typeof placeholders === 'string'?placeholders : placeholders[0]" :value="defaultValue">
+                  <input :type="[type === 'secure'?'password':'text']" :placeholder="placeholders?typeof placeholders === 'string'?placeholders : placeholders[0]:''" :value="defaultValue">
                 </label>
               </div>
               <div class="d-modal-input" v-if="type==='login'">
@@ -25,7 +25,7 @@
           </div>
           <div class="d-modal-footer">
             <div :class="['d-modal-buttons',footer.length === 2 ? 'd-modal-buttons-flex' : 'd-modal-buttons-normal']">
-              <a class="d-modal-button" v-for="(item,index) in footer" :key="index" role="button" @click="onPress(item)">{{item.text}}</a>
+              <a :class="['d-modal-button',item.className]" v-for="(item,index) in footer" :key="index" role="button" @click="onPress(item)">{{item.text}}</a>
             </div>
           </div>
         </div>
@@ -40,6 +40,8 @@ export default {
   props: {
     title: String,
     message: String,
+    className:String,
+    wrapClassName:String,
     visible: Boolean,
     maskClosable: Boolean,
     transparent: Boolean,
@@ -68,18 +70,15 @@ export default {
   methods: {
     onPress(item){
       if(item.onPress){
-        console.log(item.onPress.then)
-        if(isPromise(item.onPress)){
-          console.log(item.onPress.then)
-          item.onPress.then(()=>{
-            console.log(222)
+        let callback = item.onPress()
+        console.log(callback)
+        if(isPromise(callback)){
+          callback.then(()=>{
             this.visible = false
           })
-          item.onPress()
         }  else {
-          console.log(222)
           setTimeout(() => {
-            item.onPress()
+           this.visible = false
           }, 100)
         }
       } else {
@@ -88,6 +87,9 @@ export default {
         }, 100)
       }
     },
+    handleMaskClick(){
+      this.maskClosable && (this.visible = false)
+    }
   }
 }
 </script>
@@ -107,6 +109,9 @@ export default {
     height: 100%;
     z-index: @modal-zindex;
     background-color: @fill-mask;
+  }
+  &-mask-transparent{
+    opacity: 0;
   }
   &-wrap{
     position: fixed;
