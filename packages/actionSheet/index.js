@@ -1,1 +1,1 @@
-export {default} from './src/modal'
+export {default} from './src/actionSheet'
