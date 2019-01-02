@@ -7,7 +7,7 @@ const defaultProps = {
   destructiveButtonIndex: '',
   title: '',
   message: '',
-  maskClosable: '',
+  maskClosable: true,
   visible: false
 }
 
@@ -40,18 +40,27 @@ const getExistActionSheet = (props) => {
   return actionSheet
 }
 
+const createdActionSheet = function (options) {
+  let lastOptions = Object.assign({}, defaultProps, options)
+  let actionSheet
+  if (ActionSheetQueue.length) {
+    actionSheet = getExistActionSheet(lastOptions)
+  } else {
+    actionSheet = init(lastOptions)
+    ActionSheetQueue.push(actionSheet)
+    document.body.appendChild(actionSheet.$el)
+  }
+  actionSheet.visible = true
+}
+
 const ActionSheet = {
   showActionSheet (options = {}) {
-    let lastOptions = Object.assign({}, defaultProps, options)
-    let actionSheet
-    if (ActionSheetQueue.length) {
-      actionSheet = getExistActionSheet(lastOptions)
-    } else {
-      actionSheet = init(lastOptions)
-      ActionSheetQueue.push(actionSheet)
-      document.body.appendChild(actionSheet.$el)
-    }
-    actionSheet.visible = true
+    options.type = 'default'
+    createdActionSheet(options)
+  },
+  showShareActionSheet (options = {}) {
+    options.type = 'share'
+    createdActionSheet(options)
   }
 }
 

@@ -33,6 +33,11 @@ const _init = () => {
 }
 
 const Toast = (options = {}) => {
+  if (typeof options === 'string') {
+    options = {
+      content: options
+    }
+  }
   let duration = options.duration === undefined ? 2000 : options.duration
 
   let toast = _init()

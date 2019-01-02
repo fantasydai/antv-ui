@@ -1,16 +1,31 @@
 <template>
-  <transition name="actionSheet-slide">
-    <div class="d-actionsheet" v-if="visible">
-      <div :class="['d-actionsheet-mask',transparent&&'d-actionsheet-transparent']"></div>
-      <div class="d-actionsheet-content">
-        <div class="d-actionsheet-title" v-if="title">{{title}}</div>
-        <div class="d-actionsheet-message" v-if="title">{{message}}</div>
-        <div class="d-actionsheet-btns">
-          <div v-for="(btnTxt,index) in options" :key="index" :class="['d-actionsheet-btn',index === cancelIndex &&'d-actionsheet-cancel-btn',index === destructiveIndex &&'d-actionsheet-destruct-btn']" role="button">{{btnTxt}} <span v-if="index === cancelIndex" class="d-actionsheet-cancel-btn-mask"></span> </div>
+    <div class="d-actionsheet">
+      <div :class="['d-actionsheet-mask',transparent&&'d-actionsheet-transparent']" v-if="visible" @click="clickMask"></div>
+      <transition name="slide">
+        <div :class="['d-actionsheet-content',type === 'share' && 'd-actionsheet-content-share']" v-if="visible">
+          <div class="d-actionsheet-title" v-if="title">{{title}}</div>
+          <div class="d-actionsheet-message" v-if="title">{{message}}</div>
+          <div class="d-actionsheet-btns" v-if="type === 'default'">
+            <div v-for="(btn,index) in options" :key="index" :class="['d-actionsheet-btn',index === cancelIndex &&'d-actionsheet-cancel-btn',index === destructiveIndex &&'d-actionsheet-destruct-btn']" role="button" @click="handleClick(index,btn)">
+              {{typeof btn === 'string' ? btn : btn.text}}
+              <span v-if="btn.badge" class="d-actionsheet-badge">{{btn.badge}}</span>
+              <span v-if="index === cancelIndex" class="d-actionsheet-cancel-btn-mask"></span> </div>
+          </div>
+          <div class="d-actionsheet-share" v-if="type === 'share'">
+            <div class="d-actionsheet-share-list">
+              <div class="d-actionsheet-share-list-item" v-for="(option,index) in options" :key="index">
+                <div class="d-actionsheet-share-list-item-img">
+                  <img :src="option.url" :alt="option.title">
+                </div>
+                <div class="d-actionsheet-share-list-item-title">{{option.title}}</div>
+              </div>
+              <div class="d-actionsheet-share-list-empty-right"></div>
+            </div>
+            <div class="d-actionsheet-share-cancel-btn" role="button">{{cancelButtonText || '取消'}}</div>
+          </div>
         </div>
-      </div>
+      </transition>
     </div>
-  </transition>
 </template>
 
 <script>
@@ -23,13 +38,44 @@ export default {
     destructiveIndex: Number,
     title: String,
     message :String,
+    cancelButtonText: String,
+    type:{
+      type: String,
+      default: 'default'
+    },
     options:{
       type:Array,
       default:()=> {
         return []
       }
     },
+    badges:{
+      type:Array,
+      default:()=> {
+        return []
+      }
+    },
     callback:Function
+  },
+  methods:{
+    handleClick(index,btn){
+      if(!this.callback){
+        this.visible = false
+        return
+      }
+      const res = this.callback(index,btn)
+      if(res && res.then){
+        res.then(()=>{
+          this.visible = false
+        })
+
+      } else {
+        this.visible = false
+      }
+    },
+    clickMask(){
+      this.maskClosable && (this.visible = false)
+    }
   }
 }
 </script>
@@ -57,8 +103,11 @@ export default {
     width: 100%;
     background-color: @fill-base;
   }
+  &-content-share{
+    background: #f2f2f2;
+  }
   &-title,&-message{
-    margin: @w-spacing-lg auto;
+    margin: @w-spacing-md auto;
     padding: 0 @w-spacing-lg;
     text-align: center;
   }
@@ -72,8 +121,12 @@ export default {
   &-btns{
     text-align: center;
     color: @color-text-base;
+    overflow: hidden;
   }
   &-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-size: @actionsheet-btn-font-size;
     padding: 0 8 * @unit;
     margin: 0;
@@ -85,9 +138,21 @@ export default {
     text-overflow: ellipsis;
     overflow-x: hidden;
     .borderLine('top',@fill-tap,0,0,0,0);
-    &&-active {
+    &&:active {
       background-color: @fill-tap;
     }
+  }
+  &-badge{
+    margin-left: 8 * @unit;
+    padding: 0 5*@unit;
+    text-align: center;
+    font-size: 12*@unit;
+    height: 18*@unit;
+    line-height: 18*@unit;
+    border-radius: 12*@unit;
+    color: #fff;
+    background-color: #ff5b05;
+    white-space: nowrap;
   }
   &-destruct-btn{
     color: @color-error;
@@ -107,13 +172,54 @@ export default {
     .borderLine('top',@fill-tap,0,0,0,0);
     .borderLine('bottom',@fill-tap,0,0,0,0);
   }
-}
-.actionSheet-slide-enter-active, .actionSheet-slide-leave-active {
-    transform: translateY(0);
-    transition: transform 0.5s ease;
+  &-share{
+    &-list{
+      display: flex;
+      position: relative;
+      padding: @h-spacing-xl 0 @h-spacing-xl @h-spacing-lg;
+
+      .borderLine('top',@fill-tap,0,0,0,0);
+      overflow-x: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      &-item{
+        margin: 0 12*@unit 0 0;
+        flex-shrink: 0;
+        text-align: center;
+        &-img{
+          margin:0 auto 9*@unit;
+          width: 60*@unit;
+          height: 60*@unit;
+          background-color: #fff;
+          border-radius: 3*@unit;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          &>img{
+            width: 36px;
+            height: 36px;
+          }
+        }
+        &-title{
+          color: #888;
+          font-size: 10*@unit;
+          text-align: center;
+        }
+      }
+    }
+    .d-actionsheet-share-list-empty-right{
+      min-width: 1*@unit;
+      height: 10px;
+    }
   }
-.actionSheet-slide-enter,.actionSheet-slide-leave-to /* .fade-leave-active below version 2.1.8 */ {
-  transition: transform .5s ease;
+}
+.slide-enter-active, .slide-leave-active {
+  transform: translateY(0);
+  transition: transform .3s ease;
+}
+.slide-enter,.slide-leave-to  {
+  transition: transform .4s ease;
   transform: translateY(100%);
 }
 </style>
