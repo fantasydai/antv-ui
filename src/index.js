@@ -5,6 +5,7 @@ import CheckList from '../packages/checklist/index'
 import Switch from '../packages/switch/index'
 import Toast from '../packages/toast/index'
 import Modal from '../packages/modal/index'
+import ActionSheet from '../packages/actionSheet/index'
 
 import './assets/icon/iconfont.css'
 
@@ -23,6 +24,7 @@ const install = function (Vue) {
 
   Vue.$Toast = Vue.prototype.$Toast = Toast
   Vue.$Modal = Vue.prototype.$Modal = Modal
+  Vue.$ActionSheet = Vue.prototype.$ActionSheet = ActionSheet
 }
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)

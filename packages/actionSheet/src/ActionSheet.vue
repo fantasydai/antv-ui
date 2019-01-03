@@ -3,17 +3,30 @@
       <div :class="['d-actionsheet-mask',transparent&&'d-actionsheet-transparent']" v-if="visible" @click="clickMask"></div>
       <transition name="slide">
         <div :class="['d-actionsheet-content',type === 'share' && 'd-actionsheet-content-share']" v-if="visible">
-          <div class="d-actionsheet-title" v-if="title">{{title}}</div>
-          <div class="d-actionsheet-message" v-if="title">{{message}}</div>
+          <div :class="['d-actionsheet-content-header',type === 'share' &&'d-actionsheet-content-share-header']">
+            <div class="d-actionsheet-title" v-if="title">{{title}}</div>
+            <div class="d-actionsheet-message" v-if="title">{{message}}</div>
+          </div>
           <div class="d-actionsheet-btns" v-if="type === 'default'">
-            <div v-for="(btn,index) in options" :key="index" :class="['d-actionsheet-btn',index === cancelIndex &&'d-actionsheet-cancel-btn',index === destructiveIndex &&'d-actionsheet-destruct-btn']" role="button" @click="handleClick(index,btn)">
+            <div v-for="(btn,index) in options" :key="index" :class="['d-actionsheet-btn',index === cancelIndex &&'d-actionsheet-cancel-btn',index === destructiveIndex &&'d-actionsheet-destruct-btn']" :style="{color: btn.color}" role="button" @click="handleClick('',index,btn)">
               {{typeof btn === 'string' ? btn : btn.text}}
               <span v-if="btn.badge" class="d-actionsheet-badge">{{btn.badge}}</span>
               <span v-if="index === cancelIndex" class="d-actionsheet-cancel-btn-mask"></span> </div>
           </div>
           <div class="d-actionsheet-share" v-if="type === 'share'">
-            <div class="d-actionsheet-share-list">
-              <div class="d-actionsheet-share-list-item" v-for="(option,index) in options" :key="index">
+            <div v-if="options[0] instanceof Array">
+              <div class="d-actionsheet-share-list" v-for="(item,rowIndex) in options" :key="rowIndex">
+                <div class="d-actionsheet-share-list-item" v-for="(option,columnIndex) in item" :key="columnIndex" @click="handleClick(rowIndex,columnIndex,option)">
+                  <div class="d-actionsheet-share-list-item-img">
+                    <img :src="option.url" :alt="option.title">
+                  </div>
+                  <div class="d-actionsheet-share-list-item-title">{{option.title}}</div>
+                </div>
+                <div class="d-actionsheet-share-list-empty-right"></div>
+              </div>
+            </div>
+            <div v-else class="d-actionsheet-share-list">
+              <div class="d-actionsheet-share-list-item" v-for="(option,index) in options" :key="index" @click="handleClick('',index,option)">
                 <div class="d-actionsheet-share-list-item-img">
                   <img :src="option.url" :alt="option.title">
                 </div>
@@ -21,7 +34,7 @@
               </div>
               <div class="d-actionsheet-share-list-empty-right"></div>
             </div>
-            <div class="d-actionsheet-share-cancel-btn" role="button">{{cancelButtonText || '取消'}}</div>
+            <div class="d-actionsheet-share-cancel-btn" role="button" @click="close">{{cancelButtonText || '取消'}}</div>
           </div>
         </div>
       </transition>
@@ -58,12 +71,12 @@ export default {
     callback:Function
   },
   methods:{
-    handleClick(index,btn){
+    handleClick(rowIndex,index,btn){
       if(!this.callback){
         this.visible = false
         return
       }
-      const res = this.callback(index,btn)
+      const res = rowIndex === '' ? this.callback(index,btn) : this.callback(rowIndex,index,btn)
       if(res && res.then){
         res.then(()=>{
           this.visible = false
@@ -75,6 +88,9 @@ export default {
     },
     clickMask(){
       this.maskClosable && (this.visible = false)
+    },
+    close(){
+      this.visible = false
     }
   }
 }
@@ -102,6 +118,11 @@ export default {
     bottom: 0;
     width: 100%;
     background-color: @fill-base;
+    &-share-header{
+      position: relative;
+      .borderLine('bottom',@fill-tap,0,0,0,0);
+      overflow: hidden;
+    }
   }
   &-content-share{
     background: #f2f2f2;
@@ -177,9 +198,10 @@ export default {
       display: flex;
       position: relative;
       padding: @h-spacing-xl 0 @h-spacing-xl @h-spacing-lg;
-
-      .borderLine('top',@fill-tap,0,0,0,0);
       overflow-x: auto;
+      &:not(:first-child){
+        .borderLine('top',@fill-tap,0,0,0,0);
+      }
       &::-webkit-scrollbar {
         display: none;
       }
@@ -208,7 +230,21 @@ export default {
         }
       }
     }
-    .d-actionsheet-share-list-empty-right{
+    &-cancel-btn{
+      position: relative;
+      height: 50*@unit;
+      line-height: 50*@unit;
+      box-sizing: border-box;
+      text-align: center;
+      background-color: @fill-base;
+      color: @color-text-base;
+      font-size: @button-font-size;
+      .borderLine('top',@fill-tap,0,0,0,0);
+      &:active{
+        background: @fill-tap;
+      }
+    }
+    &-list-empty-right{
       min-width: 1*@unit;
       height: 10px;
     }
