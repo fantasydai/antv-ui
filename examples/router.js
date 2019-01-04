@@ -3,8 +3,11 @@ import List from './pages/list.vue'
 import Checkbox from './pages/checkbox.vue'
 import Switch from './pages/switch.vue'
 import Toast from './pages/toast.vue'
+import Drawer from './pages/drawer.vue'
+import Navbar from './pages/navbar.vue'
 import Modal from './pages/modal.vue'
 import ActionSheet from './pages/actionSheet.vue'
+
 export default {
   routes: [
     {
@@ -25,6 +28,14 @@ export default {
       path: '/switch',
       name: 'Switch',
       component: Switch
+    }, {
+      path: '/drawer',
+      name: 'Drawer',
+      component: Drawer
+    }, {
+      path: '/navbar',
+      name: 'Navbar',
+      component: Navbar
     }, {
       path: '/toast',
       name: 'Toast',
