@@ -6,6 +6,7 @@ import CheckList from '../packages/checklist/index'
 import Switch from '../packages/switch/index'
 import Drawer from '../packages/drawer/index'
 import Navbar from '../packages/navbar/index'
+import Popover from '../packages/popover/index'
 // JS Components
 import Toast from '../packages/toast/index'
 import Modal from '../packages/modal/index'
@@ -27,6 +28,7 @@ const install = function (Vue) {
   Vue.component(Switch.name, Switch)
   Vue.component(Drawer.name, Drawer)
   Vue.component(Navbar.name, Navbar)
+  Vue.component(Popover.name, Popover)
 
   Vue.$Toast = Vue.prototype.$Toast = Toast
   Vue.$Modal = Vue.prototype.$Modal = Modal

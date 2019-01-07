@@ -5,6 +5,8 @@ import Switch from './pages/switch.vue'
 import Toast from './pages/toast.vue'
 import Drawer from './pages/drawer.vue'
 import Navbar from './pages/navbar.vue'
+import Popover from './pages/popover.vue'
+
 import Modal from './pages/modal.vue'
 import ActionSheet from './pages/actionSheet.vue'
 
@@ -36,6 +38,10 @@ export default {
       path: '/navbar',
       name: 'Navbar',
       component: Navbar
+    }, {
+      path: '/popover',
+      name: 'Popover',
+      component: Popover
     }, {
       path: '/toast',
       name: 'Toast',
