@@ -6,7 +6,7 @@ import Toast from './pages/toast.vue'
 import Drawer from './pages/drawer.vue'
 import Navbar from './pages/navbar.vue'
 import Popover from './pages/popover.vue'
-
+import Badge from './pages/badge.vue'
 import Modal from './pages/modal.vue'
 import ActionSheet from './pages/actionSheet.vue'
 
@@ -42,6 +42,10 @@ export default {
       path: '/popover',
       name: 'Popover',
       component: Popover
+    }, {
+      path: '/badge',
+      name: 'Badge',
+      component: Badge
     }, {
       path: '/toast',
       name: 'Toast',

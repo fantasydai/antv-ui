@@ -115,7 +115,7 @@ export default {
         padding-top: 7 * @unit;
         padding-bottom: 7 * @unit;
         .d-list-item-title{
-          overflow: hidden;
+          // overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
         }

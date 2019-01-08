@@ -1,14 +1,61 @@
 <template>
   <section class="wrap">
-    <d-popover :visible="visible" :position="position" :mask="mask" :maskClosable="maskClosable"></d-popover>
-    <d-button class="btn" @click="handleClick('left')">popover bottomRight</d-button>
-    <d-button class="btn" @click="handleClick('right')">popover bottomLeft</d-button>
-    <d-button class="btn" @click="handleClick('top')">popover bottom</d-button>
-    <d-button class="btn" @click="handleClick('bottom')">popover left</d-button>
-    <d-button class="btn" @click="handleClick1('left')">popover right</d-button>
-    <d-button class="btn" @click="handleClick1('right')">popover top</d-button>
-    <d-button class="btn" @click="handleClick1('top')">popover topLeft</d-button>
-    <d-button class="btn" @click="handleClick1('bottom')">popover topRight</d-button>
+    <d-popover :visible="visible2" v-model="visible2" :position="position" :mask="mask" :maskClosable="maskClosable">
+      <div class="content" slot="content" @click="closePopover('visible2')">
+        <div><i class="d-icon-scan"></i>扫码</div>
+        <div><i class="d-icon-qrcode"></i>二维码</div>
+        <div><i class="d-icon-question-circle"></i>帮助</div>
+      </div>
+      <d-button class="btn" @click="handleClick('visible2','bottom')">popover bottom</d-button>
+    </d-popover>
+    <d-popover :visible="visible" v-model="visible" :position="position" :mask="mask" :maskClosable="maskClosable">
+      <div class="content" slot="content" @click="closePopover('visible')">
+        <div><i class="d-icon-scan"></i>扫码</div>
+        <div><i class="d-icon-qrcode"></i>二维码</div>
+        <div><i class="d-icon-question-circle"></i>帮助</div>
+      </div>
+      <d-button class="btn" @click="handleClick('visible','bottomRight')">popover bottomRight</d-button>
+    </d-popover>
+    <d-popover :visible="visible1" v-model="visible1" :position="position" :mask="mask" :maskClosable="maskClosable">
+      <div class="content" slot="content" @click="closePopover('visible1')">
+        <div><i class="d-icon-scan"></i>扫码</div>
+        <div><i class="d-icon-qrcode"></i>二维码</div>
+        <div><i class="d-icon-question-circle"></i>帮助</div>
+      </div>
+      <d-button class="btn" @click="handleClick('visible1','bottomLeft')">popover bottomLeft</d-button>
+    </d-popover>
+    <d-popover :visible="visible5" v-model="visible5" :position="position" :mask="mask" :maskClosable="maskClosable">
+      <div class="content" slot="content" @click="closePopover('visible5')">
+        <div><i class="d-icon-scan"></i>扫码</div>
+        <div><i class="d-icon-qrcode"></i>二维码</div>
+        <div><i class="d-icon-question-circle"></i>帮助</div>
+      </div>
+      <d-button class="btn" @click="handleClick('visible5','top')">popover top</d-button>
+    </d-popover>
+    <d-popover :visible="visible6" v-model="visible6" :position="position" :mask="mask" :maskClosable="maskClosable">
+      <div class="content" slot="content" @click="closePopover('visible6')">
+        <div><i class="d-icon-scan"></i>扫码</div>
+        <div><i class="d-icon-qrcode"></i>二维码</div>
+        <div><i class="d-icon-question-circle"></i>帮助</div>
+      </div>
+      <d-button class="btn" @click="handleClick('visible6','topLeft')">popover topLeft</d-button>
+    </d-popover>
+    <d-popover :visible="visible7" v-model="visible7" :position="position" :mask="mask" :maskClosable="maskClosable">
+      <div class="content" slot="content" @click="closePopover('visible7')">
+        <div><i class="d-icon-scan"></i>扫码</div>
+        <div><i class="d-icon-qrcode"></i>二维码</div>
+        <div><i class="d-icon-question-circle"></i>帮助</div>
+      </div>
+      <d-button class="btn" @click="handleClick('visible7','topRight')">popover topRight</d-button>
+    </d-popover>
+    <d-popover :visible="visible3" v-model="visible3" :position="position" :mask="mask" :maskClosable="maskClosable" :bgColor="bgColor">
+      <span class="small-content" slot="content" @click="closePopover('visible3')">popover</span>
+      <d-button class="btn" @click="handleClick('visible3','left')">popover left</d-button>
+    </d-popover>
+    <d-popover :visible="visible4" v-model="visible4" :position="position" :mask="mask" :maskClosable="maskClosable" :bgColor="bgColor">
+      <span class="small-content" slot="content" @click="closePopover('visible4')">popover</span>
+      <d-button class="btn" @click="handleClick('visible4','right')">popover right</d-button>
+    </d-popover>
   </section>
 </template>
 
@@ -18,75 +65,62 @@ export default {
   data(){
     return {
       visible:false,
+      visible1:false,
+      visible2:false,
+      visible3: false,
+      visible4: false,
+      visible5: false,
+      visible6: false,
+      visible7: false,
+      visible8: false,
+      bgColor:'#35495e',
       position: 'bottomRight',
       mask:true,
       maskClosable:true
     }
   },
   methods: {
-    handleClick(position){
-      this.drawerMode = 'overlay'
+    handleClick(type,position){
+      this[type] = false
       this.position = position
-      this.showDrawer = !this.showDrawer
+      this[type] = true
     },
-    handleClick1(position){
-      this.drawerMode = 'push'
-      this.position = position
-      this.showDrawer = !this.showDrawer
-    },
-    handleClick5(){
-     this.$ActionSheet.showShareActionSheet({
-        title: 'Title',
-        message: 'test ShareActionSheet',
-        options: [
-          [
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/wechat.png?raw=true', title: '微信' },
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/pengyouquan.png?raw=true', title: '分享到朋友圈' },
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/qq.png?raw=true', title: 'QQ' },
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/weibo.png?raw=true', title: '新浪微博' },
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/zhifubao.png?raw=true', title: '支付宝' },
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/link.png?raw=true', title: '复制链接' }
-          ],
-          [
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/wechat.png?raw=true', title: '微信' },
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/pengyouquan.png?raw=true', title: '分享到朋友圈' },
-          ],
-        ],
-        cancelIndex: 4,
-        destructiveIndex: 3
-      })
-    },
-    handleClick6(){
-      this.$ActionSheet.showActionSheet({
-        title: 'Title',
-        message: 'test ActionSheet',
-        options: [{text:'Operation1'},{text:'Operation2',color:'#ff5b05',},{text:'Operation3',color:'#6abf47'},{text:'Operation4',color:'#108ee9'},{text:'Cancel'}],
-        cancelIndex: 4,
-      })
-    },
+   closePopover(type){
+     console.log(type,this[type])
+     this[type] = false
+     console.log(this.visible)
+   }
   }
 }
 </script>
 <style lang="less" scoped>
-  .drawer{
-    height: 100vh;
-    .left-sidebar{
-      width: 260px;
-      background: #FFF;
-      height: 100%;
-    }
-  }
-  .drawer-vertical{
-    height: 100vh;
-    .left-sidebar{
-      background: #FFF;
-      width: 100%;
-    }
-  }
   .wrap{
+    .content{
+      width: 120px;
+      background: #fff;
+      padding: 5px;
+      &>div{
+        height: 25px;
+        line-height: 25px;
+        padding: 5px 0;
+        &:not(:last-child){
+          border-bottom: 1px solid #ddd;
+        }
+
+        &>i {
+          margin-right: 10px;
+        }
+      }
+    }
+    .small-content{
+      display: inline-block;
+      background: #35495e;
+      color: #fff;
+      padding: 5px;
+    }
     background-color: #f5f5f9;
     .btn{
-      margin: 20px;
+      margin: 20px 80px;
     }
   }
 </style>
