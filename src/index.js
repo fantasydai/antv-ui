@@ -8,6 +8,7 @@ import Drawer from '../packages/drawer/index'
 import Navbar from '../packages/navbar/index'
 import Popover from '../packages/popover/index'
 import Badge from '../packages/badge/index'
+import PickerView from '../packages/pickerView/index'
 // JS Components
 import Toast from '../packages/toast/index'
 import Modal from '../packages/modal/index'
@@ -31,6 +32,7 @@ const install = function (Vue) {
   Vue.component(Navbar.name, Navbar)
   Vue.component(Popover.name, Popover)
   Vue.component(Badge.name, Badge)
+  Vue.component(PickerView.name, PickerView)
 
   Vue.$Toast = Vue.prototype.$Toast = Toast
   Vue.$Modal = Vue.prototype.$Modal = Modal

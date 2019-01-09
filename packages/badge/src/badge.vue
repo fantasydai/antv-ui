@@ -1,7 +1,7 @@
 <template>
-  <span class="d-badge">
+  <span :class="['d-badge',turning && 'd-badge-wrap']">
     <slot></slot>
-    <sup :class="[dot && 'd-badge-dot',dot && size === 'large' &&'d-badge-dot-large',!dot && !turning && 'd-badge-text',turning && 'd-badge-coner',turning && size === 'large' && 'd-badge-coner-large']"> {{formatText}} </sup>
+    <sup :class="[dot && 'd-badge-dot',dot && size === 'large' &&'d-badge-dot-large',!dot && !turning && 'd-badge-text',turning && 'd-badge-turning',turning && size === 'large' && 'd-badge-turning-large']" :style="styles"> {{formatText}} </sup>
   </span>
 </template>
 <script>
@@ -17,6 +17,12 @@ export default {
       default: 'normal',
       validator(val){
         return ['normal','large'].indexOf(val) > -1
+      }
+    },
+    styles: {
+      type: Object,
+      default: ()=>{
+        return {}
       }
     }
   },
@@ -56,6 +62,20 @@ export default {
     height: 16*@unit;
     width: 16*@unit;
   }
+  &-turning{
+    width: 5 * @link-button-font-size;
+    padding: 2* @unit 8*@unit;
+    position: absolute;
+    right: -2 * @link-button-font-size;
+    top: 0.5 * @link-button-font-size;
+    background-color: @color-badge;
+    color: @color-text-base-inverse;
+    white-space: nowrap;
+    transform: rotate(45deg);
+    text-align: center;
+    font-size: @font-size-subhead;
+
+  }
   &-text{
     top: auto;
     display: block;
@@ -72,6 +92,9 @@ export default {
     white-space: nowrap;
     z-index: 10;
   }
+}
+.d-badge-wrap{
+  overflow: hidden;
 }
 </style>
 

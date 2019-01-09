@@ -7,6 +7,7 @@ import Drawer from './pages/drawer.vue'
 import Navbar from './pages/navbar.vue'
 import Popover from './pages/popover.vue'
 import Badge from './pages/badge.vue'
+import PickerView from './pages/pickerView.vue'
 import Modal from './pages/modal.vue'
 import ActionSheet from './pages/actionSheet.vue'
 
@@ -46,6 +47,10 @@ export default {
       path: '/badge',
       name: 'Badge',
       component: Badge
+    }, {
+      path: '/pickerView',
+      name: 'PickerView',
+      component: PickerView
     }, {
       path: '/toast',
       name: 'Toast',

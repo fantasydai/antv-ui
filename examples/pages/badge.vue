@@ -1,14 +1,13 @@
 <template>
   <section class="item-wrap">
-    <List header="Basic Style">
+    <List header="Badge">
       <ListItem class="list-item" >
         <d-badge dot>
           <span :style="{ width: '26px', height: '26px', background: '#ddd', display: 'inline-block'}"></span>
         </d-badge>
         <span style="marginLeft:12px">Dot badge</span>
       </ListItem>
-      <ListItem class="list-item" arrow="right" :onClick="()=>{}">Title</ListItem>
-      <ListItem class="list-item" title="Title" :onClick="()=>{}" extra="customer" arrow="right">
+      <ListItem class="list-item" title="Badge" :onClick="()=>{}" extra="customer" arrow="right">
         <span slot="extra">
           <d-badge text="123" maxNumber="99">
           </d-badge>
@@ -16,19 +15,22 @@
         </span>
 
       </ListItem>
-      <ListItem class="list-item" >Title,Title,Title,Title,Title,Title,Title,Title,Title, Title,Title,Title,</ListItem>
-    </List>
-    <List header="Sub Title">
-      <ListItem class="list-item" title="Title" subTitle="subTitle" extra="customer">
-        <template slot="extra">
-          12345
-        </template>
+      <ListItem class="list-item" :onClick="()=>{}" arrow="right">
+        <span style="marginRight:12px">Custom</span>
+        <d-badge text="热门" :styles="{'background-color':'#ff5b05','border-radius':'4px'}">
+        </d-badge>
+        <d-badge text="new" :styles="{'background-color':'#f96268','border-radius':'0'}">
+        </d-badge>
+        <d-badge text="红包" :styles="{'background-color':'#fff',color:'#ed0a17',border:'1px solid #ed0a17','border-radius':'4px'}">
+        </d-badge>
+        <d-badge text="会员" :styles="{'background-color':'rgb(33, 182, 138)','border-radius':'4px'}">
+        </d-badge>
       </ListItem>
-      <ListItem class="list-item" title="asd" subTitle="subTitle" arrow="right" :onClick="()=>{}" thumb="https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png"></ListItem>
-    </List>
-    <List header="Multiple Line">
-      <ListItem class="list-item" multipleLine>Multiple Title,Title,Multiple Title, Title, Multiple Title,</ListItem>
-      <ListItem class="list-item" multipleLine extra="extra text">Multiple Title,Multiple Title,Multiple Title,Multiple Title,Multiple Title,</ListItem>
+       <ListItem class="list-item" arrow="right" :onClick="()=>{}">
+        <d-badge text="hot" turning>
+          <div class="turning"> turning badge</div>
+        </d-badge>
+       </ListItem>
     </List>
   </section>
 
@@ -43,6 +45,11 @@ export default {
   .item-wrap{
     background-color: #f5f5f9;
     padding-bottom: 40px;
+  }
+  .turning{
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
   }
 </style>
 
