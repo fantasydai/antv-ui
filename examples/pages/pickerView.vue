@@ -151,6 +151,9 @@ export default {
 .picker-item{
   margin-bottom: 20px;
 }
+.result{
+  margin-top: 20px;
+}
 </style>
 
 
