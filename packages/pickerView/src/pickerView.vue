@@ -1,12 +1,12 @@
 <template>
   <div class="d-picker">
     <div class="d-picker-items">
-      <picketItem v-for="(item,index) in activeData" :key="index" :data="item" :styles="itemStyle instanceof Array ? itemStyle[index] : itemStyle" :defaultValue="value[index]"></picketItem>
+      <picketItem v-for="(item,index) in activeData" :key="index" :data="item" :styles="itemStyle instanceof Array ? itemStyle[index] : itemStyle" :defaultValue="activeValue[index]" :slotIndex="index" @change="valueChangeHandler" @dataChange="dataChangeHandler" :indicatorStyle="indicatorStyle"></picketItem>
     </div>
   </div>
 </template>
 <script>
-import treeFilter from 'array-tree-filter'
+import treeFilter from 'array-tree-filter';
 import picketItem from './pickerItem.vue'
 export default {
   name: 'd-pickerView',
@@ -40,13 +40,22 @@ export default {
       type: Boolean,
       default: true
     },
-    onChange:Function,
-
+    onChange: {
+      type: Function,
+      default: ()=>{}
+    }
   },
   data(){
     return {
       columns:this.cols,
+      activeValue: Object.assign([],this.value) || [],
       activeData: []
+    }
+  },
+  watch:{
+    value(value){
+      this.activeValue = Object.assign([],value)
+      this.getActiveData()
     }
   },
   mounted(){
@@ -57,26 +66,42 @@ export default {
   },
   methods:{
     getActiveData(){
-      this.activeData = []
+      let activeData = []
       if(!this.linkage || !this.cols || this.data.length  < 2) {
-        this.activeData = this.data[0] instanceof Array ? this.data : [this.data]
+        activeData = this.data[0] instanceof Array ? this.data : [this.data]
       } else {
-        this.activeData.push(this.data)
+        activeData.push(this.data)
         let activeParant = this.data
         for (let index = 0; index < this.columns -1; index++) {
           let activeChildren = ''
-          if(this.value[index]) {
+          if(this.activeValue[index]) {
             activeParant.forEach(item=>{
-              item.value === this.value[index] && (activeChildren = item.children || [])
+              item.value === this.activeValue[index] && (activeChildren = item.children || [])
             })
             !activeChildren && (activeChildren = activeParant[0].children || [])
           } else {
             activeChildren = activeParant[0].children || []
           }
-          this.activeData.push(activeChildren)
+          activeData.push(activeChildren)
           activeParant = activeChildren
         }
       }
+      this.activeData = activeData
+    },
+    valueChangeHandler(index,value){
+      this.$set(this.activeValue, index, typeof value === 'object' ? value.value :value)
+      if(this.linkage) {
+        this.getActiveData()
+        this.activeItems = treeFilter(this.data,(item, level) => item.value ===this.activeValue[level])
+      }
+      this.$nextTick(()=>{
+        this.onChange(this.activeValue.filter(item=>item !== undefined),this.activeItems)
+      })
+
+    },
+    dataChangeHandler(index,value){
+      this.$set(this.activeValue, index, typeof value === 'object' ? value.value :value)
+      this.activeItems = treeFilter(this.data,(item, level) => item.value ===this.activeValue[level])
     }
   }
 }
