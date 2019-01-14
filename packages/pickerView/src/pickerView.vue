@@ -1,7 +1,7 @@
 <template>
   <div class="d-picker">
     <div class="d-picker-items">
-      <picketItem v-for="(item,index) in activeData" :key="index" :data="item" :styles="itemStyle instanceof Array ? itemStyle[index] : itemStyle" :defaultValue="activeValue[index]" :slotIndex="index" @change="valueChangeHandler" @dataChange="dataChangeHandler" :indicatorStyle="indicatorStyle"></picketItem>
+      <picketItem v-for="(item,index) in activeData" :key="index" :data="item" :styles="itemStyle instanceof Array ? itemStyle[index] : itemStyle" :defaultValue="activeValue[index]" :slotIndex="index" @change="valueChangeHandler" @dataChange="dataChangeHandler" :indicatorStyle="indicatorStyle" :format="format[index]"></picketItem>
     </div>
   </div>
 </template>
@@ -18,6 +18,12 @@ export default {
       }
     },
     value: {
+      type: Array,
+      default: ()=>{
+        return []
+      }
+    },
+    format: {
       type: Array,
       default: ()=>{
         return []
@@ -56,7 +62,7 @@ export default {
     value(value){
       this.activeValue = Object.assign([],value)
       this.getActiveData()
-    }
+    },
   },
   mounted(){
     this.getActiveData()
@@ -87,6 +93,14 @@ export default {
         }
       }
       this.activeData = activeData
+      this.getActiveValue()
+    },
+    getActiveValue(){
+      this.activeData.forEach((data,index)=>{
+        if(!this.activeValue[index]) {
+          this.activeValue[index] = data[0].value || data[0]
+        }
+      })
     },
     valueChangeHandler(index,value){
       this.$set(this.activeValue, index, typeof value === 'object' ? value.value :value)
@@ -95,9 +109,8 @@ export default {
         this.activeItems = treeFilter(this.data,(item, level) => item.value ===this.activeValue[level])
       }
       this.$nextTick(()=>{
-        this.onChange(this.activeValue.filter(item=>item !== undefined),this.activeItems)
+        this.onChange(this.activeValue.filter(item=>item !== undefined),index,this.activeItems)
       })
-
     },
     dataChangeHandler(index,value){
       this.$set(this.activeValue, index, typeof value === 'object' ? value.value :value)

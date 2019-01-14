@@ -1,6 +1,6 @@
 <template>
   <div class="d-modal">
-    <div :class="['d-modal-mask',transparent && 'd-modal-mask-transparent']" v-if="visible" @click="handleMaskClick"></div>
+    <div :class="['d-modal-mask',transparent && 'd-modal-mask-transparent']" v-if="visible" @click="handleMaskClick" @touchmove="maskMove"></div>
     <div :class="['d-modal-wrap',wrapClassName]">
       <transition name="d-bounce">
         <div :class="['d-modal-content',className]" v-if="visible">
@@ -87,8 +87,13 @@ export default {
         }, 100)
       }
     },
-    handleMaskClick(){
+    handleMaskClick(e){
       this.maskClosable && (this.visible = false)
+
+    },
+    maskMove(e){
+      e.preventDefault()
+      e.stopPropagation()
     }
   }
 }

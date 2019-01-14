@@ -3,7 +3,7 @@
     <div class="d-picker-mask" :style="{'background-size': `100% ${defaultTop}px`}"></div>
     <div class="d-picker-indicator" :style="Object.assign({},{height: defaultHeight+'px',top:`${defaultTop}px`},indicatorStyle)"></div>
     <div class="d-picker-content" :style="Object.assign({},{padding: `${defaultTop}px 0px`},styles)" ref="dragContent">
-      <div v-for="(item,index) in  data" :key="index" :style="{height:defaultHeight+'px','line-height':defaultHeight+'px'}" :class="['d-picker-content-item',index === activeIndex && 'd-picker-content-item-selected']">{{typeof item === 'object' ? item.label:item }}</div>
+      <div v-for="(item,index) in  formatData" :key="index" :style="{height:defaultHeight+'px','line-height':defaultHeight+'px'}" :class="['d-picker-content-item',index === activeIndex && 'd-picker-content-item-selected']">{{typeof item === 'object' ? item.label:item}}</div>
     </div>
   </div>
 </template>
@@ -24,6 +24,7 @@ export default {
         return {}
       }
     },
+    format: String,
     defaultValue:[String,Number],
     slotIndex:Number,
     data:{
@@ -52,8 +53,8 @@ export default {
   },
   watch: {
     data(val){
-      this.$emit('dataChange',this.slotIndex,this.data.length ? this.data[0] : undefined)
       this.getDefaultValue()
+      this.$emit('dataChange',this.slotIndex,this.data.length ? this.data[this.activeIndex] : undefined)
     },
     defaultValue(){
       this.getDefaultValue()
@@ -61,6 +62,16 @@ export default {
     activeIndex(to,from){
       to !== from && this.$emit('change',this.slotIndex,this.data.length ? this.data[this.activeIndex] : this.data[0])
     },
+  },
+  computed: {
+    formatData:function(){
+      return this.data.map(item=>{
+        if(this.format){
+          item.label ? (item.label = this.format.replace('${value}',item.label)) : (item = this.format.replace('${value}',item))
+        }
+        return item
+      })
+    }
   },
   methods: {
     getDefaultValue(){

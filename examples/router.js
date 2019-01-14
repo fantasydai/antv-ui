@@ -8,6 +8,7 @@ import Navbar from './pages/navbar.vue'
 import Popover from './pages/popover.vue'
 import Badge from './pages/badge.vue'
 import PickerView from './pages/pickerView.vue'
+import DatePickerView from './pages/datePickerView.vue'
 import Modal from './pages/modal.vue'
 import ActionSheet from './pages/actionSheet.vue'
 
@@ -51,6 +52,10 @@ export default {
       path: '/pickerView',
       name: 'PickerView',
       component: PickerView
+    }, {
+      path: '/datePickerView',
+      name: 'DatePickerView',
+      component: DatePickerView
     }, {
       path: '/toast',
       name: 'Toast',
