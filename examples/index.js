@@ -8,7 +8,6 @@ import VueRouter from 'vue-router'
 import './index.less'
 
 Vue.config.productionTip = false
-console.log(dui)
 Vue.use(dui)
 Vue.use(VueRouter)
 

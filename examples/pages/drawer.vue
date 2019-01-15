@@ -17,6 +17,7 @@
       <d-button class="btn" @click="handleClick1('top')">push drawer top</d-button>
       <d-button class="btn" @click="handleClick1('bottom')">push drawer bottom</d-button>
     </d-drawer>
+    <d-button class="btn" @click="handleClick1('bottom')">push drawer bottom</d-button>
   </section>
 
 </template>
@@ -41,36 +42,6 @@ export default {
       this.drawerMode = 'push'
       this.position = position
       this.showDrawer = !this.showDrawer
-    },
-    handleClick5(){
-     this.$ActionSheet.showShareActionSheet({
-        title: 'Title',
-        message: 'test ShareActionSheet',
-        options: [
-          [
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/wechat.png?raw=true', title: '微信' },
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/pengyouquan.png?raw=true', title: '分享到朋友圈' },
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/qq.png?raw=true', title: 'QQ' },
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/weibo.png?raw=true', title: '新浪微博' },
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/zhifubao.png?raw=true', title: '支付宝' },
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/link.png?raw=true', title: '复制链接' }
-          ],
-          [
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/wechat.png?raw=true', title: '微信' },
-            { url: 'https://github.com/fantasydai/d-ui/blob/dev/0.0.1/src/assets/images/pengyouquan.png?raw=true', title: '分享到朋友圈' },
-          ],
-        ],
-        cancelIndex: 4,
-        destructiveIndex: 3
-      })
-    },
-    handleClick6(){
-      this.$ActionSheet.showActionSheet({
-        title: 'Title',
-        message: 'test ActionSheet',
-        options: [{text:'Operation1'},{text:'Operation2',color:'#ff5b05',},{text:'Operation3',color:'#6abf47'},{text:'Operation4',color:'#108ee9'},{text:'Cancel'}],
-        cancelIndex: 4,
-      })
     },
   }
 }

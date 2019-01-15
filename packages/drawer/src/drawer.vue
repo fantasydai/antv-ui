@@ -1,6 +1,6 @@
 <template>
   <div :class="['d-drawer',`d-drawer-${position}`]">
-    <div v-if="showMask && mode==='overlay'" :class="['d-drawer-mask',visible && 'd-drawer-mask-show']" @click="clickMask"></div>
+    <div v-if="mask && mode==='overlay'" :class="['d-drawer-mask',visible && 'd-drawer-mask-show']" @click="clickMask"></div>
     <div :class="['d-drawer-side',visible && 'd-drawer-side-show']" ref="drawerSide">
       <slot name="side"></slot>
     </div>
@@ -14,7 +14,7 @@ export default {
   name:'d-drawer',
   props:{
     visible: Boolean,
-    showMask:{
+    mask:{
       type: Boolean,
       default: true
     },
@@ -70,7 +70,7 @@ export default {
 .d-drawer{
   position: relative;
   &-mask{
-    position: absolute;
+    position: fixed;
     height: 100%;
     z-index: 1;
     top: 0;
@@ -83,7 +83,7 @@ export default {
     background: @fill-mask;
   }
   &-side{
-    position: absolute;
+    position: fixed;
     z-index: 2;
     overflow: auto;
     transition: transform .4s;

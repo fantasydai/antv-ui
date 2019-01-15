@@ -98,7 +98,7 @@ export default {
     getActiveValue(){
       this.activeData.forEach((data,index)=>{
         if(!this.activeValue[index]) {
-          this.activeValue[index] = data[0].value || data[0]
+          this.activeValue[index] = data[0] ? data[0].value || data[0] : undefined
         }
       })
     },

@@ -10,6 +10,8 @@ import Popover from '../packages/popover/index'
 import Badge from '../packages/badge/index'
 import PickerView from '../packages/pickerView/index'
 import DatePickerView from '../packages/datePickerView/index'
+import Picker from '../packages/picker/index'
+import DatePicker from '../packages/datePicker/index'
 // JS Components
 import Toast from '../packages/toast/index'
 import Modal from '../packages/modal/index'
@@ -35,6 +37,8 @@ const install = function (Vue) {
   Vue.component(Badge.name, Badge)
   Vue.component(PickerView.name, PickerView)
   Vue.component(DatePickerView.name, DatePickerView)
+  Vue.component(Picker.name, Picker)
+  Vue.component(DatePicker.name, DatePicker)
   Vue.$Toast = Vue.prototype.$Toast = Toast
   Vue.$Modal = Vue.prototype.$Modal = Modal
   Vue.$ActionSheet = Vue.prototype.$ActionSheet = ActionSheet

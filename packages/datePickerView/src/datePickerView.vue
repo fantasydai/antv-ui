@@ -14,7 +14,7 @@ export default {
         return ['date','time','datetime']
       }
     },
-    value: Date,
+    value: [Date,String],
     MonthRange : {
       type: Array,
       default:  ()=>{
@@ -76,8 +76,8 @@ export default {
       endDay: 31,
       startHour: 0,
       endHour: 23,
-      startMinite: 0,
-      endMinite: 59,
+      startMinute: 0,
+      endMinute: 59,
       cols:3
     }
   },
@@ -93,22 +93,37 @@ export default {
   },
   created() {
     this.formatProps()
-    this.getActiveValue(this.value)
     this.getDate()
+    this.getActiveValue(this.value)
   },
   methods:{
     getActiveValue(value){
       let activeValue = []
       if(!value){
+        let result = []
+        this.dateData.forEach(date=>{
+          result.push(date[0] || '')
+        })
+        let date = this.mode === 'time' ? result.join(':') : this.mode === 'date' ? dayjs(result.join('/')).toDate() : dayjs(result.slice(0,3).join('/')+' '+result.slice(3).join(':')).toDate()
+        this.$nextTick(()=>{
+          this.onChange(date,result)
+        })
         return
       }
-      this.modeList.forEach((mode,index)=>{
-        let value = dayjs(this.value.getTime())[mode === 'Day'?'date' : mode.toLowerCase()]()
-        mode === 'Month' && value++
-        activeValue.push(value < 10 ? '0'+ value : '' + value)
-      })
+      if(this.mode === 'time'){
+        if(typeof this.value !== 'string'){
+          console.error('mode等于"time"时value值须为String类型')
+          return
+        }
+        activeValue = this.value.split(':')
+      } else {
+        this.modeList.forEach((mode,index)=>{
+          let value = dayjs(this.value.getTime())[mode === 'Day'?'date' : mode.toLowerCase()]()
+          mode === 'Month' && value++
+          activeValue.push(value < 10 ? '0'+ value : '' + value)
+        })
+      }
       this.activeValue = activeValue
-      console.log(this.activeValue)
     },
     formatProps(){
       if(['date','datetime'].indexOf(this.mode) > -1){
@@ -121,14 +136,14 @@ export default {
         if(this.mode === 'time') {
           this.startHour = Math.max(0,parseInt(this.HourRange[0]))
           this.endHour = Math.min(23,parseInt(this.HourRange[1]))
-          this.startMinite = Math.max(0,parseInt(this.MinuteRange[0]))
+          this.startMinute = Math.max(0,parseInt(this.MinuteRange[0]))
           this.endHour = Math.min(59,parseInt(this.MinuteRange[1]))
         }
       } else {
         this.startHour = Math.max(0,parseInt(this.HourRange[0]))
         this.endHour = Math.min(23,parseInt(this.HourRange[1]))
-        this.startMinite = Math.max(0,parseInt(this.MinuteRange[0]))
-        this.endMinite = Math.min(59,parseInt(this.MinuteRange[1]))
+        this.startMinute = Math.max(0,parseInt(this.MinuteRange[0]))
+        this.endMinute = Math.min(59,parseInt(this.MinuteRange[1]))
       }
       switch (this.mode) {
         case 'date':
@@ -137,11 +152,11 @@ export default {
           break
         case 'time':
           this.cols = 2
-          this.modeList = ['Hour','Minite']
+          this.modeList = ['Hour','Minute']
           break
         case 'datetime':
           this.cols = 5
-          this.modeList = ['Year','Month','Day','Hour','Minite']
+          this.modeList = ['Year','Month','Day','Hour','Minute']
           break
         default:
           break
@@ -168,9 +183,9 @@ export default {
       }
       this.getDate()
       this.activeValue = newValue
-      let result = this.mode === 'time' ? newValue.join(':') : this.mode === 'date' ? dayjs(newValue.join('/')) : dayjs(newValue.slice(0,3).join('/')+' '+newValue.slice(3).join(':'))
+      let date = this.mode === 'time' ? newValue.join(':') : this.mode === 'date' ? dayjs(newValue.join('/')).toDate() : dayjs(newValue.slice(0,3).join('/')+' '+newValue.slice(3).join(':')).toDate()
       this.$nextTick(()=>{
-        this.onChange(result)
+        this.onChange(date,newValue)
       })
     }
   }
