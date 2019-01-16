@@ -9,7 +9,7 @@
     <d-datePicker :visible="visible" v-model="visible" :title="title" :format="format" :onChange="dataChange" :onConfirm="onConfirm"></d-datePicker>
     <d-datePicker :visible="visible1" mode="time" :format="format" v-model="visible1" :title="title" :onChange="dataChange" :onConfirm="onConfirm"></d-datePicker>
     <d-datePicker :visible="visible2" mode="datetime" v-model="visible2" :title="title" :onChange="dataChange" :onConfirm="onConfirm"></d-datePicker>
-    <!-- <d-datePicker :visible="visible3" v-model="visible3" :title="title" :onChange="dataChange" :onConfirm="onConfirmPromise"></d-datePicker> -->
+    <d-datePicker :visible="visible3" v-model="visible3" :title="title" :onChange="dataChange" :onConfirm="onConfirmPromise"></d-datePicker>
 
   </section>
 </template>
@@ -122,15 +122,15 @@ export default {
   },
   methods: {
     handleClick1(){
-      this.title = ' single data datePicker'
+      this.title = ' datePicker'
       this.visible = true
     },
     handleClick2(){
-      this.title = ' multiple data datePicker'
+      this.title = 'timePicker'
       this.visible1 = true
     },
     handleClick3(){
-      this.title = ' linkage data datePicker'
+      this.title = 'datetimePicker'
       this.visible2 = true
     },
     handleClick4(){
@@ -140,10 +140,10 @@ export default {
     onConfirm(value){
       this.dataChange(value)
     },
-    onConfirmPromise(value,items){
-      let labels = items.map(item=>{return item.label})
+    onConfirmPromise(value){
+      let labels = typeof value === Date ? dayjs(value).format("YYYY MM-DD HH:mm:ss") : value
       return new Promise((resolve)=>{
-        this.$Toast(`当前选择: ${labels.join('-')}`)
+        this.$Toast(`当前选择: ${labels}`)
         setTimeout(resolve, 2000);
       })
     },

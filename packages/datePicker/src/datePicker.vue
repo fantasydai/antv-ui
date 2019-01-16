@@ -137,10 +137,9 @@ export default {
   },
   methods: {
     cancel() {
-      this.activeValues = this.mode === 'time'? this.activeValues : dayjs(this.activeValues).clone().toDate()
-      console.log(this.activeValues)
       this.onCancel()
       this.show = false
+      this.activeValues = this.mode === 'time'? this.activeValues : dayjs(this.activeValues).clone().toDate()
       this.$emit('input',this.show)
     },
     confirm() {
@@ -160,8 +159,7 @@ export default {
     dataChange(date,val){
       this.selectValue = date
       !this.activeValues && (this.activeValues = this.mode === 'time'? date : dayjs(date).toDate())
-      console.log(333,this.activeValues)
-      this.onChange && this.onChange(date)
+      this.show && this.onChange && this.onChange(date)
     }
   }
 }
