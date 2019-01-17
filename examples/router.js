@@ -11,6 +11,7 @@ import PickerView from './pages/pickerView.vue'
 import DatePickerView from './pages/datePickerView.vue'
 import Picker from './pages/picker.vue'
 import DatePicker from './pages/datePicker.vue'
+import Scroller from './pages/scroller.vue'
 import Modal from './pages/modal.vue'
 import ActionSheet from './pages/actionSheet.vue'
 
@@ -78,6 +79,10 @@ export default {
       path: '/actionSheet',
       name: 'ActionSheet',
       component: ActionSheet
+    }, {
+      path: '/scroller',
+      name: 'Scroller',
+      component: Scroller
     }
   ]
 }
