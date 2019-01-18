@@ -82,7 +82,7 @@
       },
       onChangePullDown(){
         this.pullDownRefreshObj = this.pullDownRefreshObj ? {
-          threshold: 90,
+          threshold: 60,
           stop: 40,
         } : false
         this.rebuildScroll()
@@ -112,32 +112,12 @@
   .scroller-box {
     position: relative;
     height: 400px;
+    border-top: 1px solid #ddd;
   }
   .menu{
     height: 200px;
     margin-top: 10px;
     background: #fff;
-  }
-  .list-content {
-    list-style: none;
-    background: #fff;
-  }
-  .list-item {
-    height: 60px;
-    line-height: 60px;
-    font-size: 18px;
-    padding-left: 20px;
-    border-bottom: 1px solid #e5e5e5;
-  }
-  .go-top {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    background-color: #009a61;
-    border-radius: 5px;
-    border: 1px solid #fff;
-    color: #fff;
-    padding: 10px 15px;
   }
 
 </style>

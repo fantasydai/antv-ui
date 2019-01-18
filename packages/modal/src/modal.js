@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import ModalComponent from './Modal.vue'
 
-const defaultPorps = {
+const defaultProps = {
   title: '提示',
   message: '',
   visible: false,
@@ -44,7 +44,7 @@ const getExistModal = (props) => {
 
 const Modal = {
   alert (options = {}) {
-    let lastOptions = Object.assign({ footer: [{ text: '我知道了' }] }, defaultPorps, options)
+    let lastOptions = Object.assign({ footer: [{ text: '我知道了' }] }, defaultProps, options)
     let modal
     if (modalQueue.length) {
       modal = getExistModal(lastOptions)
@@ -56,7 +56,7 @@ const Modal = {
     modal.visible = true
   },
   confirm (options = {}) {
-    let lastOptions = Object.assign({ footer: [{ text: '取消' }, { text: '确定' }] }, defaultPorps, options)
+    let lastOptions = Object.assign({ footer: [{ text: '取消' }, { text: '确定' }] }, defaultProps, options)
     if (lastOptions.footer.length && lastOptions.footer.length < 2) {
       console.error('The footer prop of Confirm Modal should has two members at least ')
       return
@@ -76,7 +76,7 @@ const Modal = {
       console.error('input 为 password 类型不支持默认值')
       return
     }
-    let lastOptions = Object.assign({ footer: [{ text: 'Cancel' }, { text: 'Submit' }], isprompt: true }, defaultPorps, options)
+    let lastOptions = Object.assign({ footer: [{ text: 'Cancel' }, { text: 'Submit' }], isprompt: true }, defaultProps, options)
     let modal
     if (modalQueue.length) {
       modal = getExistModal(lastOptions)

@@ -159,7 +159,6 @@
           freeScroll: this.freeScroll,
           mouseWheel: this.mouseWheel,
           bounce: this.bounce,
-          infinity: this.infinity
         }
         this.scroll = new BScroll(this.$refs.scroller, options)
         this.pullDownRefresh && this._initPullDownRefresh()
@@ -255,6 +254,7 @@
 </script>
 
 <style lang="less" scoped>
+@import '../../../src/style/reset.less';
   .d-scroller{
     position: relative;
     height: 100%;
@@ -267,13 +267,14 @@
     .list-content{
       position: relative;
       z-index: 10;
+      list-style: none;
       background: #fff;
     }
     .list-item{
       height: 60px;
       line-height: 60px;
       font-size: 18px;
-      padding-left: 20px;
+      padding-left: 60px;
       border-bottom: 1px solid #e5e5e5;
     }
   }

@@ -13,7 +13,7 @@ import DatePickerView from '../packages/datePickerView/index'
 import Picker from '../packages/picker/index'
 import DatePicker from '../packages/datePicker/index'
 import Scroller from '../packages/scroller/index'
-
+import ImagePreview from '../packages/imagePreview/index'
 // JS Components
 import Toast from '../packages/toast/index'
 import Modal from '../packages/modal/index'
@@ -42,6 +42,7 @@ const install = function (Vue) {
   Vue.component(Picker.name, Picker)
   Vue.component(DatePicker.name, DatePicker)
   Vue.component(Scroller.name, Scroller)
+  Vue.component(ImagePreview.name, ImagePreview)
   Vue.$Toast = Vue.prototype.$Toast = Toast
   Vue.$Modal = Vue.prototype.$Modal = Modal
   Vue.$ActionSheet = Vue.prototype.$ActionSheet = ActionSheet
