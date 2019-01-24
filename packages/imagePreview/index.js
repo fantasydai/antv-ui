@@ -1,1 +1,1 @@
-export {default} from './imagePreview.vue'
+export {default} from './src/imagePreview.vue'

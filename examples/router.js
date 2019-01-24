@@ -12,6 +12,7 @@ import DatePickerView from './pages/datePickerView.vue'
 import Picker from './pages/picker.vue'
 import DatePicker from './pages/datePicker.vue'
 import Scroller from './pages/scroller.vue'
+import ImagePreview from './pages/imagePreview.vue'
 import Modal from './pages/modal.vue'
 import ActionSheet from './pages/actionSheet.vue'
 
@@ -83,6 +84,10 @@ export default {
       path: '/scroller',
       name: 'Scroller',
       component: Scroller
+    }, {
+      path: '/imagePreview',
+      name: 'ImagePreview',
+      component: ImagePreview
     }
   ]
 }
