@@ -9,8 +9,20 @@ function getRect (el) {
     height: el.offsetHeight
   }
 }
+function deepCopy (arr) {
+  var obj = arr instanceof Array ? [] : {}
+  for (var item in arr) {
+    if (typeof arr[item] === 'object') {
+      obj[item] = deepCopy(arr[item])
+    } else {
+      obj[item] = arr[item]
+    }
+  }
+  return obj
+}
 
 export {
   isPromise,
-  getRect
+  getRect,
+  deepCopy
 }

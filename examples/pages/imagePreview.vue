@@ -1,13 +1,15 @@
 <template>
   <section class="wrap">
     <section class="btn-wrap">
-      <d-button class="btn" @click="handleClick1">show imagePreview</d-button>
-      <d-button class="btn" @click="handleClick2">show multiple Picker</d-button>
-      <d-button class="btn" @click="handleClick3">linkage Picker</d-button>
-      <d-button class="btn" @click="handleClick4">Promise Picker</d-button>
+      <d-button class="btn" @click="handleClick1" >show imagePreview</d-button>
+      <d-button class="btn" @click="handleClick2">show dot indicator imagePreview</d-button>
+      <d-button class="btn" @click="handleClick3">show default index imagePreview</d-button>
+      <d-button class="btn" @click="handleClick4">show loop imagePreview</d-button>
     </section>
-    <d-imagePreview :visible="visible" :imgs="data"></d-imagePreview>
-
+    <d-imagePreview :visible="visible" :imgs="data" v-model="visible"></d-imagePreview>
+    <d-imagePreview :visible="visible1" :imgs="data" indicatorType="dot" v-model="visible1"></d-imagePreview>
+    <d-imagePreview :visible="visible2" :imgs="data" :initialIndex="2" v-model="visible2"></d-imagePreview>
+    <d-imagePreview :visible="visible3" :imgs="data" loop  v-model="visible3"></d-imagePreview>
   </section>
 </template>
 
@@ -25,7 +27,7 @@ export default {
       },{
         url:'../../../src/assets/images/imagePreview-4.jpg'
       }],
-      data1: [[2011,2012,2013,2014,2015,2016,2017,2018,2019],['春','夏','秋','冬']],
+     data1: [[2011,2012,2013,2014,2015,2016,2017,2018,2019],['春','夏','秋','冬']],
       data2:[
         {
           label: '北京',
@@ -120,11 +122,9 @@ export default {
   },
   methods: {
     handleClick1(){
-      this.title = ' single data picker'
       this.visible = true
     },
     handleClick2(){
-      this.title = ' multiple data picker'
       this.visible1 = true
     },
     handleClick3(){
