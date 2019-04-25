@@ -183,7 +183,7 @@ export default {
   &-item{
     touch-action: manipulation;
     text-align: center;
-    font-size: 16px;
+    font-size: 16*@unit;
     height: 34px;
     line-height: 34px;
     color: #000;
@@ -191,7 +191,7 @@ export default {
     text-overflow: ellipsis;
   }
   &-item-selected{
-    font-size: 17px;
+    font-size: 17*@unit;
   }
 }
 </style>

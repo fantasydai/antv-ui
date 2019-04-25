@@ -1,3 +1,4 @@
+import Index from './pages/index.vue'
 import Button from './pages/button.vue'
 import List from './pages/list.vue'
 import Checkbox from './pages/checkbox.vue'
@@ -13,11 +14,17 @@ import Picker from './pages/picker.vue'
 import DatePicker from './pages/datePicker.vue'
 import Scroller from './pages/scroller.vue'
 import ImagePreview from './pages/imagePreview.vue'
+import SwipeAction from './pages/swipeAction.vue'
 import Modal from './pages/modal.vue'
 import ActionSheet from './pages/actionSheet.vue'
 
 export default {
   routes: [
+    {
+      path: '/',
+      name: 'Index',
+      component: Index
+    },
     {
       path: '/button',
       name: 'Button',
@@ -88,6 +95,10 @@ export default {
       path: '/imagePreview',
       name: 'ImagePreview',
       component: ImagePreview
+    }, {
+      path: '/swipeAction',
+      name: 'SwipeAction',
+      component: SwipeAction
     }
   ]
 }

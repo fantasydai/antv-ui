@@ -61,6 +61,7 @@ export default {
 }
 .result{
   margin-top: 20px;
+  font-size: 16PX;
 }
 </style>
 
