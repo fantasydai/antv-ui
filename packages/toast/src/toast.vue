@@ -77,7 +77,7 @@ export default {
     padding: @h-spacing-md @w-spacing-lg;
     text-align: center;
     background: @toast-fill;
-    border-radius: 5px;
+    border-radius: 5*@unit;
     color: @color-text-base-inverse;
 
     .icons{
@@ -89,8 +89,8 @@ export default {
       .loading-icon{
         .d-icon-loading{
           display: block;
-          width: 32px;
-          height: 32px;
+          width: 32*@unit;
+          height: 32*@unit;
           margin: auto;
           font-size: 28*@unit !important;
           animation: loading-rotate 1.4s linear infinite;
@@ -100,8 +100,8 @@ export default {
     .image{
       display: block;
       margin: @h-spacing-md auto;
-      width: 32px;
-      height: 32px;
+      width: 32*@unit;
+      height: 32*@unit;
     }
   }
   .d-toast-content-top{

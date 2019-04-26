@@ -5,12 +5,16 @@ import routes from './router'
 import * as dui from '../src/index.js'
 import VueRouter from 'vue-router'
 import App from './app.vue'
+import Header from './components/component-title.vue'
 
 import './index.less'
 
 Vue.config.productionTip = false
 Vue.use(dui)
 Vue.use(VueRouter)
+
+Vue.component('Header', Header)
+
 const router = new VueRouter(routes)
 
 /* eslint-disable no-new */

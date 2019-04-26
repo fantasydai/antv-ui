@@ -243,7 +243,7 @@
       },
       _afterPullDown() {
         setTimeout(() => {
-          this.pullDownStyle = `top:${this.pullDownInitTop}px`
+          this.pullDownStyle = `top:${this.pullDownInitTop}*@unit`
           this.beforePullDown = true
           this.isRebounding = false
           this.refresh()
@@ -254,6 +254,7 @@
 </script>
 
 <style lang="less" scoped>
+@import '../../../src/style/default.less';
 @import '../../../src/style/reset.less';
   .d-scroller{
     position: relative;
@@ -271,11 +272,11 @@
       background: #fff;
     }
     .list-item{
-      height: 60px;
-      line-height: 60px;
-      font-size: 18px;
-      padding-left: 60px;
-      border-bottom: 1px solid #e5e5e5;
+      height: 60*@unit;
+      line-height: 60*@unit;
+      font-size: 18*@unit;
+      padding-left: 60*@unit;
+      border-bottom: 1*@unit solid #e5e5e5;
     }
   }
   .pulldown-wrapper{
@@ -287,7 +288,7 @@
     align-items: center;
     transition: all;
     .after-trigger{
-      margin-top: 10px;
+      margin-top: 10*@unit;
     }
   }
   .pullup-wrapper{
@@ -295,6 +296,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 10px 0;
+    padding: 10*@unit 0;
   }
 </style>

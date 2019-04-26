@@ -135,7 +135,7 @@ export default {
     pointer-events: none;
   }
   &-content{
-    width: 270px;
+    width: 270*@unit;
     position: relative;
     background-color: @fill-base;
     border: 0;
@@ -147,7 +147,7 @@ export default {
     pointer-events: auto;
   }
   &-header{
-    padding: 6px 15px 15px;
+    padding: 6*@unit 15*@unit 15*@unit;
   }
   &-title{
     margin: 0;
@@ -179,7 +179,7 @@ export default {
       top: 0;
       width: 200%;
       height: 200%;
-      border: 1px solid #ddd;/*px*/
+      border: 1*@unit solid #ddd;/*px*/
       border-radius: 6*@unit;
       transform-origin: 0 0;
       transform: scale(.5);
@@ -200,7 +200,7 @@ export default {
       border: 0;
       width: 98%;
       height: 34 * @unit;
-      top: 1px;
+      top: 1*@unit;
       box-sizing: border-box;
       margin: 0;
       font-size: 100%;
@@ -219,14 +219,14 @@ export default {
     .d-modal-button{
       flex:1;
       &:first-child{
-        border-right: 1px solid @border-color-base;
+        border-right: 1*@unit solid @border-color-base;
         color:@color-text-base;
       }
     }
   }
   &-button{
     position: relative;
-    border-top: 1px solid @border-color-base;
+    border-top: 1*@unit solid @border-color-base;
     box-sizing: border-box;
     text-align: center;
     text-decoration: none;

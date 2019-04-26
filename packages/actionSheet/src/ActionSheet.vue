@@ -219,8 +219,8 @@ export default {
           justify-content: center;
           align-items: center;
           &>img{
-            width: 36px;
-            height: 36px;
+            width: 36*@unit;
+            height: 36*@unit;
           }
         }
         &-title{
@@ -246,7 +246,7 @@ export default {
     }
     &-list-empty-right{
       min-width: 1*@unit;
-      height: 10px;
+      height: 10*@unit;
     }
   }
 }

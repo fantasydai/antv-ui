@@ -111,8 +111,9 @@
 <style lang="less" scoped>
   .scroller-box {
     position: relative;
-    height: 400px;
-    border-top: 1px solid #ddd;
+    height: 600px;
+    border-top: 1PX solid #ddd;
+    margin-top: 130px;
   }
   .menu{
     height: 200px;

@@ -96,19 +96,19 @@ export default {
 <style lang="less" scoped>
   .wrap{
     .content{
-      width: 120px;
+      width: 120PX;
       background: #fff;
-      padding: 5px;
+      padding: 5PX;
       &>div{
-        height: 25px;
-        line-height: 25px;
-        padding: 5px 0;
+        height: 25PX;
+        line-height: 25PX;
+        padding: 5PX 0;
         &:not(:last-child){
-          border-bottom: 1px solid #ddd;
+          border-bottom: 1PX solid #ddd;
         }
 
         &>i {
-          margin-right: 10px;
+          margin-right: 10PX;
         }
       }
     }
@@ -116,11 +116,11 @@ export default {
       display: inline-block;
       background: #35495e;
       color: #fff;
-      padding: 5px;
+      padding: 5PX;
     }
     background-color: #f5f5f9;
     .btn{
-      margin: 20px 80px;
+      margin: 20PX 80px;
     }
   }
 </style>

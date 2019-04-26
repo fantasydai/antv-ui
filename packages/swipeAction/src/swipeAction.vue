@@ -133,6 +133,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@import '../../../src/style/default.less';
 .d-swipe-action {
   position: relative;
   overflow: hidden;
@@ -150,7 +151,7 @@ export default {
       align-items: center;
       text-align: center;
       overflow: hidden;
-      padding: 0 10px;
+      padding: 0 10*@unit;
     }
   }
   &-left {

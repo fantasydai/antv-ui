@@ -154,7 +154,7 @@ export default {
     }
     &-slot-wrap{
       overflow: hidden;
-      border-radius: 3px;
+      border-radius: 3*@unit;
     }
   }
   .d-popover-content-bottomRight{

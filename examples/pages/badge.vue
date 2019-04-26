@@ -47,9 +47,9 @@ export default {
     padding-bottom: 40px;
   }
   .turning{
-    width: 200px;
-    height: 50px;
-    line-height: 50px;
+    width: 200PX;
+    height: 50PX;
+    line-height: 50PX;
   }
 </style>
 

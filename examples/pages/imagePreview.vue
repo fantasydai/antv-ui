@@ -19,13 +19,13 @@ export default {
   data(){
     return {
       data: [{
-        url:'../../../src/assets/images/imagePreview-1.jpg'
+        url:require('../../src/assets/images/imagePreview-1.jpg')
       },{
-        url:'../../../src/assets/images/imagePreview-2.jpg'
+        url:require('../../src/assets/images/imagePreview-2.jpg')
       },{
-        url:'../../../src/assets/images/imagePreview-3.jpg'
+        url:require('../../src/assets/images/imagePreview-3.jpg')
       },{
-        url:'../../../src/assets/images/imagePreview-4.jpg'
+        url:require('../../src/assets/images/imagePreview-4.jpg')
       }],
      data1: [[2011,2012,2013,2014,2015,2016,2017,2018,2019],['春','夏','秋','冬']],
       data2:[

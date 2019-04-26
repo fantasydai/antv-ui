@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name:'toast',
+  name:'ActionSheet',
   methods: {
     handleClick1(){
       this.$ActionSheet.showActionSheet({

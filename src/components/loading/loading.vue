@@ -11,8 +11,8 @@
 <style lang="less" scoped>
   .mf-loading-container{
     img{
-      width: 20px;
-      height: 20px;
+      width: 20PX;/*px*/
+      height: 20PX;/*px*/
       display: block;
     }
   }

@@ -1,4 +1,5 @@
 module.exports = {
+  publicPath: './',
   pages: {
     index: {
       // page 的入口
@@ -23,7 +24,8 @@ module.exports = {
     loaderOptions: {
       postcss: {
         plugins: [require('postcss-pxtorem')({
-          rootValue: 75
+          rootValue: 75,
+          propList: ['*'],
         })]
       }
     }

@@ -1,10 +1,5 @@
 <template>
-  <div>
-    <header>
-      <div class="demo-preivew-header-title">
-        <d-navbar class="navbar" :leftContent="[{icon:'back',callback:clickBack}]">{{title}}</d-navbar>
-      </div>
-    </header>
+  <div class="wrap">
     <section class="demo-preivew-content">
       <div class="demo-preivew-content-title">d-UI</div>
       <div class="demo-preivew-content-message">Vue移动端组件库</div>
@@ -42,9 +37,43 @@ export default {
           name: 'DatePickerView',
           key: 'datePickerView'
         },{
-          name: '按钮 Button',
-          key: 'button'
+          name: '抽屉 Drawer',
+          key: 'drawer'
+        },{
+          name: ' ImagePreview',
+          key: 'imagePreview'
+        },{
+          name: '列表 List',
+          key: 'list'
+        },{
+          name: '弹窗 Modal',
+          key: 'modal'
+        },{
+          name: '导航栏 Navbar',
+          key: 'navbar'
+        },{
+          name: '选择器 Picker',
+          key: 'picker'
+        },{
+          name: 'PickerView',
+          key: 'pickerView'
+        },{
+          name: '气泡 Popover',
+          key: 'popover'
+        },{
+          name: '滚动 Scroller',
+          key: 'scroller'
+        },{
+          name: 'SwipeAction',
+          key: 'swipeAction'
+        },{
+          name: '开关 Switch',
+          key: 'switch'
+        },{
+          name: '提示 Toast',
+          key: 'toast'
         },
+        
       ]
     }
   },
@@ -57,27 +86,19 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.demo-preivew-header-title{
-  padding-top: 18px;
-  background: url(../../src/assets/images/tabbar.png) no-repeat;
-  background-size: 100% 20px;
-  .navbar{
-    background: #2E2E31;
-  }
-}
 .demo-preivew-content{
   background-color: #f5f5f9;
   color: rgba(0,0,0,.75);
   &-title{
-    padding: 20px;
-    font-size: 42px;
+    padding: 40px 20px;
+    font-size: 50px;
   }
   &-message{
     padding-left: 20px;
     font-size: 28px;
   }
   &-items{
-    margin-top: 20px;
+    margin-top: 40px;
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -87,12 +108,12 @@ export default {
     background: #fff;
   }
   &-item{
-    padding: 70px 0 20px;
+    padding: 90px 0 40px;
     min-width: 33%;
     flex: 1;
     background-repeat: no-repeat;
     background-size: 40px;
-    background-position: center 20px;
+    background-position: center 30px;
     text-align: center;
     font-size: 32px;
     border-right: 1PX solid #ddd;
