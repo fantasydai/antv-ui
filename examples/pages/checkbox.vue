@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-24 17:53:04
+ * @LastEditTime: 2019-09-10 19:32:13
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <section class="item-wrap">
     <d-checklist title="Checklist default" :options="options" :value="currentValue" v-model="currentValue"></d-checklist>
@@ -58,9 +65,6 @@ export default {
     }
   },
   watch:{
-    currentValue(to,from){
-      console.log(to)
-    }
   }
 }
 </script>

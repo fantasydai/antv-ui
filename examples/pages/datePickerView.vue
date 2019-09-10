@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-24 17:53:04
+ * @LastEditTime: 2019-04-24 17:53:04
+ * @LastEditors: your name
+ -->
 <template>
   <div class="wrap">
     <div class="picker-item">
@@ -48,7 +55,6 @@ export default {
       this.result2 = value
     },
     dateChange3(value){
-      console.log(value)
       this.result3 = dayjs(value).format("YYYY MM-DD HH:mm:ss")
     },
   },

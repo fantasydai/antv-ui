@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-09-10 19:16:53
+ * @LastEditTime: 2019-09-10 19:16:53
+ * @LastEditors: your name
+ -->
 <template>
   <div>
     <List header="Scroller" class="menu">
@@ -32,7 +39,6 @@
 </template>
 
 <script>
-  let count = 1
   export default {
     name: 'app',
     data() {
@@ -66,7 +72,6 @@
         })
       },
       onPullingDown() {
-        count = 0
         this.getData().then(res => {
           this.items = res
         })

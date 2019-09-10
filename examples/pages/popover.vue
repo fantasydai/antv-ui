@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: daiyueyue
+ * @Date: 2019-09-10 19:16:53
+ * @LastEditTime: 2019-09-10 19:27:11
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <section class="wrap">
     <d-popover :visible="visible2" v-model="visible2" :position="position" :mask="mask" :maskClosable="maskClosable">
@@ -86,9 +93,7 @@ export default {
       this[type] = true
     },
    closePopover(type){
-     console.log(type,this[type])
      this[type] = false
-     console.log(this.visible)
    }
   }
 }

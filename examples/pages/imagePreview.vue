@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-09-10 19:16:53
+ * @LastEditTime: 2019-09-10 19:31:38
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <section class="wrap">
     <section class="btn-wrap">
@@ -135,8 +142,7 @@ export default {
       this.title = ' promise picker'
       this.visible3 = true
     },
-    onConfirm(value){
-      console.log(value)
+    onConfirm(){
     },
     onConfirmPromise(value,items){
       let labels = items.map(item=>{return item.label})
@@ -145,8 +151,7 @@ export default {
         setTimeout(resolve, 2000);
       })
     },
-    dataChange(value){
-      console.log(value)
+    dataChange(){
     },
   }
 }

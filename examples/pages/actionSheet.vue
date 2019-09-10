@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-09-10 19:16:53
+ * @LastEditTime: 2019-09-10 19:16:53
+ * @LastEditors: your name
+ -->
 <template>
   <section class="btn-wrap">
     <d-button class="btn" @click="handleClick1">showActionSheet</d-button>
@@ -40,7 +47,7 @@ export default {
         message: 'test ActionSheet',
         options: ['Operation1','Operation2','Operation3','Cancel',],
         cancelIndex: 3,
-        callback:(index,btn)=>{
+        callback:()=>{
           return new Promise((resolve)=>{
             this.$Toast('2s后关闭')
             setTimeout(resolve, 2000);

@@ -1,10 +1,17 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-09-10 19:16:53
+ * @LastEditTime: 2019-09-10 19:29:40
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div ref="scroller" class="d-scroller">
     <div class="d-scroller-content">
       <div ref="content">
         <slot>
           <ul class="list-content">
-            <li @click="clickItem($event,item)" class="list-item" v-for="item in data">{{item}}</li>
+            <li @click="clickItem($event,item)" class="list-item" v-for="(item,index) in data" :key="index">{{item}}</li>
           </ul>
         </slot>
       </div>
@@ -45,7 +52,6 @@
   import BScroll from 'better-scroll'
   import Loading from '../../../src/components/loading/loading.vue'
   import Bubble from '../../../src/components/bubble/bubble.vue'
-  import { getRect } from '../../../src/utils/utils.js'
 
   export default {
     name: 'd-scroller',
@@ -180,7 +186,6 @@
         this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
       },
       clickItem(e, item) {
-        console.log(e)
         this.$emit('click', item)
       },
       destroy() {

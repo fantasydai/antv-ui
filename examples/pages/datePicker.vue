@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-24 17:53:04
+ * @LastEditTime: 2019-09-10 19:30:08
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <section class="wrap">
     <section class="btn-wrap">
@@ -147,8 +154,8 @@ export default {
         setTimeout(resolve, 2000);
       })
     },
-    dataChange(value){
-      console.log(typeof value === Date ? dayjs(value).format("YYYY MM-DD HH:mm:ss") : value )
+    dataChange(){
+      //console.log(typeof value === Date ? dayjs(value).format("YYYY MM-DD HH:mm:ss") : value )
     },
   }
 }

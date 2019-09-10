@@ -1,5 +1,12 @@
+/*
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-09-10 19:04:28
+ * @LastEditTime: 2019-09-10 19:04:28
+ * @LastEditors: your name
+ */
 import Vue from 'vue'
-import toastVue from './Toast.vue'
+import toastVue from './toast.vue'
 
 const ToastConstructor = Vue.extend(toastVue)
 

@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-24 17:52:59
+ * @LastEditTime: 2019-04-24 17:52:59
+ * @LastEditors: your name
+ -->
 <template>
   <div :class="['d-list-item',onClick&&'d-list-item-active' ]" @click="handleClick">
     <div v-if="thumb" class="d-list-item-thumb">
@@ -44,7 +51,6 @@ export default {
       type: String,
       default: '',
       validator(value){
-        console.log(value)
         return [
           '',
           'right',

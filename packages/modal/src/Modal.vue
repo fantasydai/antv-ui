@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: daiyueyue
+ * @Date: 2019-09-10 19:16:53
+ * @LastEditTime: 2019-09-10 19:25:40
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="d-modal">
     <div :class="['d-modal-mask',transparent && 'd-modal-mask-transparent']" v-if="visible" @click="handleMaskClick" @touchmove="maskMove"></div>
@@ -71,7 +78,6 @@ export default {
     onPress(item){
       if(item.onPress){
         let callback = item.onPress()
-        console.log(callback)
         if(isPromise(callback)){
           callback.then(()=>{
             this.visible = false
@@ -87,7 +93,7 @@ export default {
         }, 100)
       }
     },
-    handleMaskClick(e){
+    handleMaskClick(){
       this.maskClosable && (this.visible = false)
 
     },

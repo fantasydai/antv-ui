@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-09-10 19:16:53
+ * @LastEditTime: 2019-09-10 19:16:53
+ * @LastEditors: your name
+ -->
 <template>
   <div>
     <span class="slot-wrap" ref="switch">
@@ -102,7 +109,6 @@ export default {
           this.positionStyle.top = offsetTop + switchSlot.offsetHeight/2 - content.offsetHeight/2 + 'px'
           break
         case 'right':
-          console.log(switchSlot.offsetLeft,switchSlot.getBoundingClientRect().top)
           this.positionStyle.left = switchSlot.offsetLeft  + switchSlot.offsetWidth + this.distance + 'px'
           this.positionStyle.top = offsetTop + switchSlot.offsetHeight/2 - content.offsetHeight/2 + 'px'
           break

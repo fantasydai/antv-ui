@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-24 17:53:04
+ * @LastEditTime: 2019-09-10 19:32:03
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <section class="item-wrap">
     <List header="Switch">
@@ -73,15 +80,13 @@ export default {
     }
   },
   watch: {
-    currentValue(to,from){
-      console.log(to)
-    }
+    // currentValue(to,from){
+    // }
   },
   methods: {
-    onChange(e){
-      console.log(e)
+    onChange(){
     },
-    onClick(e){
+    onClick(){
       alert('disabled click callback')
     }
   }

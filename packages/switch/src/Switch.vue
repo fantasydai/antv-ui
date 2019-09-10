@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-24 17:52:59
+ * @LastEditTime: 2019-04-24 17:52:59
+ * @LastEditors: your name
+ -->
 <template>
   <label :class="['d-switch',types==='rectangle'&&'d-switch-rec']">
     <input type="checkbox" name="" :disabled="disabled" @change="checkedChange" class="d-switch-checkbox" :value="checked?'on':'off'" v-model="currentValue">
@@ -50,9 +57,7 @@ export default {
       }
     },
     handleClick(event){
-      console.log(2)
       if(this.disabled && this.onClick){
-         console.log(3)
         this.onClick(event)
       }
     }
