@@ -1,3 +1,10 @@
+<!--
+ * @Description: In User Settings Edit
+ * @Author: your name
+ * @Date: 2019-04-24 17:52:59
+ * @LastEditTime: 2019-09-10 18:45:13
+ * @LastEditors: Please set LastEditors
+ -->
 <template>
   <div class="d-swipe-action">
     <div class="d-swipe-action-item d-swipe-action-left" v-if="left.length">
@@ -50,8 +57,11 @@ export default {
     }
   },
   mounted() {
-    this.getDistance()
-    this.bindSlide()
+    setTimeout(() => {
+      this.getDistance()
+      this.bindSlide()
+    }, 0);
+    
   },
   methods: {
     getDistance(){
@@ -71,6 +81,7 @@ export default {
           this.rightDistance += btn.offsetWidth
         }
       })
+      console.log(this.rightDistance)
 
     },
     bindSlide(){
@@ -80,9 +91,14 @@ export default {
           this.dragState.start = new Date()
           this.dragState.startX = e.pageX
           this.dragState.startY = e.pageY
+          this.$refs.dragContent.style.transition = ''
+          let translate = window.getComputedStyle(this.$refs.dragContent).transform.replace(/[^0-9\.\-,]/g,'').split(',')
+          let translateX = Number(translate[translate.length -2])
+          if(translateX !== 0) {
+            translateUtil.translateElement(el, 0, null)
+          }
         },
         drag: (e) => {
-
             this.dragState.dragDistance = e.pageX - this.dragState.startX
             if(!this.checkDrag(this.dragState.dragDistance)){
               return
@@ -98,35 +114,68 @@ export default {
             this.dragState = {}
             return
           }
-          // this.locateContent(index)
+          this.$refs.dragContent.style.transition = 'all 0.2s ease'
+          this.locateContent(el)
         }
       })
     },
     checkDrag(dragDistance){
       let translate = window.getComputedStyle(this.$refs.dragContent).transform.replace(/[^0-9\.\-,]/g,'').split(',')
-      let translateX = translate[translate.length -2]
-      console.log(this.right.length,translateX,this.rightDistance)
-      if((!this.left.length && translateX > 0) || (!this.right.length && translateX < 0)) {
-        return false
-      }
-      if((this.left.length && translateX > this.leftDistance) || (this.right.length && -translateX > this.rightDistance)) {
-        return false
+      let translateX = Number(translate[translate.length -2])
+      //check dragDistance
+      if(dragDistance  > translateX) {
+        //slide to right
+        if(translateX < 0) {
+          return true
+        }
+        if((!this.left.length && translateX > 0) || (!this.right.length && translateX < 0)) {
+          return false
+        }
+        if((this.left.length && translateX >= this.leftDistance) || (this.right.length && -translateX >= this.rightDistance)) {
+          return false
+        }
+
+      } else {
+        //slide to left
+        if(translateX > 0) {
+          return true
+        }
+        if((!this.left.length && !this.right.length && translateX > 0) || (!this.right.length && translateX < 0)) {
+          return false
+        }
+        if((this.left.length && translateX >= this.leftDistance) || (this.right.length && -translateX >= this.rightDistance)) {
+          return false
+        }
       }
       return true
     },
-    locateContent(index){
-      index = Math.max(0,Math.min(this.data.length - 1,-index))
-      let el = this.$refs.dragContent
-      let translate = -this.pageWidth * index
-      translateUtil.translateElement(el, translate, null)
-      this.activeIndex = index
+    locateContent(el){
+      let translate = window.getComputedStyle(this.$refs.dragContent).transform.replace(/[^0-9\.\-,]/g,'').split(',')
+      let translateX = Number(translate[translate.length -2])
+      if(!translateX) return
+      if(translateX < 0) {
+        //slide to left
+        if( translateX < 0 && - translateX < this.rightDistance/2) {
+          this.reset(el)
+        } else {
+          translateUtil.translateElement(el, -this.rightDistance, null)
+        }
+      } else {
+        //slide to right
+        if( translateX  > 0 && translateX < this.rightDistance/2) {
+          this.reset(el)
+        } else {
+          translateUtil.translateElement(el, this.leftDistance, null)
+        }
+      }
     },
     reset(el){
       translateUtil.translateElement(el, 0, null)
     },
     handleClick(item){
       item.onPress && item.onPress()
-      this.show = false
+      let el = this.$refs.dragContent
+      this.reset(el)
     }
   }
 }
@@ -158,6 +207,9 @@ export default {
   }
   &-right {
     right: 0;
+  }
+  &-content{
+    // transition: all 0.2s ease;
   }
 }
 </style>
