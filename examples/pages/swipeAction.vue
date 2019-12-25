@@ -20,6 +20,18 @@
       <d-swipeAction :right="right1">
         <ListItem class="list-item" arrow="right" >callback swipeAction</ListItem>
       </d-swipeAction>
+      <d-swipeAction :right="right1" :autoClose="false">
+        <ListItem class="list-item" arrow="right" >disable autoClose swipeAction</ListItem>
+      </d-swipeAction>
+      <d-swipeAction :right="right1" :disabled="true">
+        <ListItem class="list-item" arrow="right" >disabled swipeAction</ListItem>
+      </d-swipeAction>
+      <d-swipeAction :right="right1" :onOpen="onOpen">
+        <ListItem class="list-item" arrow="right" >onOpen swipeAction</ListItem>
+      </d-swipeAction>
+      <d-swipeAction :right="right1" :onClose="onClose">
+        <ListItem class="list-item" arrow="right" >onClose swipeAction</ListItem>
+      </d-swipeAction>
     </List>
   </section>
 
@@ -71,6 +83,14 @@ export default {
           color: '#fff'
         }
       }]
+    }
+  },
+  methods: {
+    onOpen(){
+      this.$Toast('open swipeAction')
+    },
+    onClose(){
+      this.$Toast('close swipeAction')
     }
   }
 }

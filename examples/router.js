@@ -15,6 +15,7 @@ import DatePicker from './pages/datePicker.vue'
 import Scroller from './pages/scroller.vue'
 import ImagePreview from './pages/imagePreview.vue'
 import SwipeAction from './pages/swipeAction.vue'
+import Carousel from './pages/carousel.vue'
 import Modal from './pages/modal.vue'
 import ActionSheet from './pages/actionSheet.vue'
 
@@ -99,6 +100,11 @@ export default {
       path: '/swipeAction',
       name: 'SwipeAction',
       component: SwipeAction
+    },
+    {
+      path: '/Carousel',
+      name: 'carousel',
+      component: Carousel
     }
   ]
 }

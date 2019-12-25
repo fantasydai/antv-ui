@@ -1,7 +1,7 @@
 <template>
   <header>
       <div class="demo-preivew-header-title">
-        <d-navbar class="navbar" :leftContent="[{icon:'back',callback:clickBack}]">d-UI</d-navbar>
+        <d-navbar class="navbar" :leftContent="[{icon:'back',callback:clickBack}]">antv-ui</d-navbar>
       </div>
     </header>
 </template>
