@@ -1,18 +1,49 @@
 <template>
   <section class="item-wrap">
-    <antv-carousel class="carousel">
-      <antv-carousel-item>
-        <img src="https://zos.alipayobjects.com/rmsportal/AiyWuByWklrrUDlFignR.png" alt="" srcset="">
-      </antv-carousel-item>
-      <antv-carousel-item>
-        <img src="https://zos.alipayobjects.com/rmsportal/TekJlZRVCjLFexlOCuWn.png" alt="" srcset="">
-      </antv-carousel-item>
-      <antv-carousel-item>
-        <img src="https://zos.alipayobjects.com/rmsportal/IJOtIlfsYdTyaDTRVrLI.png" alt="" srcset="">
-      </antv-carousel-item>
-    </antv-carousel>
+    <List header="Basic Carousel">
+      <antv-carousel class="carousel">
+        <antv-carousel-item v-for="(img, index) in imgs" :key="index">
+          <img :src="`https://zos.alipayobjects.com/rmsportal/${img}.png`" alt="" srcset="">
+        </antv-carousel-item>
+      </antv-carousel>
+    </List>
+    <List header="AutoPlay Carousel">
+      <antv-carousel class="carousel" :autoplay="true" :infinite="true">
+        <antv-carousel-item v-for="(img, index) in imgs" :key="index">
+          <img :src="`https://zos.alipayobjects.com/rmsportal/${img}.png`" alt="" srcset="">
+        </antv-carousel-item>
+      </antv-carousel>
+    </List>
+    <List header="Default Index Carousel">
+      <antv-carousel class="carousel" :autoplay="true" :infinite="true" :selectedIndex="2">
+        <antv-carousel-item v-for="(img, index) in imgs" :key="index">
+          <img :src="`https://zos.alipayobjects.com/rmsportal/${img}.png`" alt="" srcset="">
+        </antv-carousel-item>
+      </antv-carousel>
+    </List>
+    <List header="Hide Indicator Carousel">
+      <antv-carousel class="carousel" :autoplay="true" :infinite="true" :indicator="false">
+        <antv-carousel-item v-for="(img, index) in imgs" :key="index">
+          <img :src="`https://zos.alipayobjects.com/rmsportal/${img}.png`" alt="" srcset="">
+        </antv-carousel-item>
+      </antv-carousel>
+    </List>
   </section>
 </template>
+<script>
+export default {
+  name: 'antv-carousel-example',
+  data(){
+    return {
+      imgs: [
+        'AiyWuByWklrrUDlFignR',
+        'TekJlZRVCjLFexlOCuWn',
+        'IJOtIlfsYdTyaDTRVrLI'
+      ]
+    }
+  }
+}
+</script>
 
 <style lang="less" scoped>
   .item-wrap{

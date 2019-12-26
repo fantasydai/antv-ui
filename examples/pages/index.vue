@@ -1,7 +1,7 @@
 <template>
   <div class="wrap">
     <section class="demo-preivew-content">
-      <div class="demo-preivew-content-title">antv-ui</div>
+      <div class="demo-preivew-content-title">Antv UI</div>
       <div class="demo-preivew-content-message">Vue移动端组件库</div>
       <div class="demo-preivew-content-items">
         <div class="demo-preivew-content-item" v-for="(page,index) in pageItems" :key="index" :style="{backgroundImage: 'url('+ require('../../src/assets/images/'+page.key+'.png')+ ')'}" @click="()=>{ $router.push(`/${page.key}`)}">{{page.name}}</div>
@@ -30,6 +30,9 @@ export default {
         },{
           name: 'Checkbox',
           key: 'checkbox'
+        },{
+          name: 'Carousel',
+          key: 'carousel'
         },{
           name: 'DatePicker',
           key: 'datePicker'
@@ -110,6 +113,7 @@ export default {
   &-item{
     padding: 90px 0 40px;
     min-width: 33%;
+    max-width: 33%;
     flex: 1;
     background-repeat: no-repeat;
     background-size: 40px;

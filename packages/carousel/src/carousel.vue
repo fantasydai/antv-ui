@@ -3,6 +3,11 @@
     <ul class="antv-carousel-wrap" ref="carousel">
       <slot></slot>
     </ul>
+    <div class="antv-carousel-indicator" v-if="indicator" :style="indicatorStyle">
+      <div :class="['antv-carousel-indicator-dot', index === currentIndex + 1 && 'antv-carousel-indicator-dot-active']" v-for="index in carouselNums" :key="index">
+        <span :style="index === currentIndex + 1 ? Object.assign({}, dotStyle, dotActiveStyle) : dotStyle"></span>
+      </div>
+    </div>
   </section>
 </template>
 <script>
@@ -16,7 +21,7 @@ export default {
       type: Number,
       default: 0
     },
-    dots: {
+    indicator: {
       type: Boolean,
       default: true
     },
@@ -40,6 +45,10 @@ export default {
       type: Function,
       default: ()=>{}
     },
+    indicatorStyle: {
+      type: Object,
+      default: ()=>{return {}}
+    },
     dotStyle: {
       type: Object,
       default: ()=>{return {}}
@@ -52,6 +61,7 @@ export default {
   data(){
     return {
       el: null,
+      timmer: null,
       carouselNums: 0,
       carouselWidth: 0,
       carouselItems: [],
@@ -63,12 +73,16 @@ export default {
         dragDistance:0,
       },
       currentIndex: 0,
-      transDuration: 0.4
+      transDuration: 0.4,
+      
     }
   },
   mounted() {
     this.initStyle()
+    if(this.carouselNums <=1) return
+    this.checkDefaultIndex()
     this.bindSlide()
+    this.play()
   },
   methods: {
     initStyle(){
@@ -83,12 +97,21 @@ export default {
         })
       }
     },
+    checkDefaultIndex(){
+      if(!this.selectedIndex || this.selectedIndex >= this.carouselNums || this.selectedIndex < 0) return
+      this.currentIndex = this.selectedIndex
+      let endPos = -this.carouselWidth * this.currentIndex
+      this.translateElement(endPos)
+      this.checkIndex()
+    },
     bindSlide(){
       draggable(this.el,{
         start: (e) =>{
           this.dragState.dragDistance = 0
           this.dragState.startX = e.pageX
-          this.el.style.transition = ''
+          this.cancelTransition()
+
+          this.timmer && this.pause()
         },
         drag: (e) => {
             this.dragState.dragDistance = e.pageX - this.dragState.startX
@@ -99,13 +122,43 @@ export default {
             
         },
         end: (e) => {
-          this.el.style.transition = `all ${this.transDuration}s ease`
+          this.addTransition()
           setTimeout(() => {
             this.locateContent()
+            this.afterChange()
           }, 20);
+          this.infinite && this.play()
           
         }
       })
+    },
+    play(){
+      if(!this.autoplay) return
+
+      this.timmer = setInterval(() => {
+        this.addTransition()
+        let endPos = -this.carouselWidth * (++this.currentIndex)
+        if(this.currentIndex  + 1 >= this.carouselNums) {
+          this.translateElement(endPos)
+          if(this.infinite) {
+            setTimeout(() => {
+              this.checkIndex()
+            }, this.transDuration*100 + 300);
+          } else {
+            this.pause()
+          }
+          this.updateStartPos(endPos)
+          this.afterChange()
+          return
+        }
+        this.translateElement(endPos)
+        this.afterChange()
+        this.updateStartPos(endPos)
+      }, this.autoplayInterval);
+    },
+    pause(){
+      clearInterval(this.timmer)
+      this.timmer = null
     },
     formatEndPos(distance){
       return distance > 0 ? Math.min(distance, this.carouselWidth) : Math.max(distance, -this.carouselWidth)
@@ -121,12 +174,13 @@ export default {
         endPos = -this.carouselWidth * this.currentIndex
       }
       this.translateElement(endPos)
-      this.dragState.startPos = endPos
+      this.updateStartPos(endPos)
       setTimeout(() => {
         this.checkIndex()
       }, this.transDuration*100 + 300);
-      
-
+    },
+    updateStartPos(endPos){
+      this.dragState.startPos = endPos
     },
     checkFirstSlide(){
       if(this.currentIndex === 0 && this.dragState.dragDistance > 0) {
@@ -137,10 +191,13 @@ export default {
       if(this.currentIndex + 1 === this.carouselNums) {
         //slide to lastItem
         this.carouselItems[0].style.left =`${this.carouselNums * this.carouselWidth}PX`
+      } else if (this.currentIndex + 2 === this.carouselNums) {
+        this.carouselItems[0].style.left = '0PX'
       } else if(this.currentIndex === this.carouselNums) {
         this.resetCarouse('start')
       } else if (this.currentIndex === -1) {
         this.resetCarouse('end')
+        this.carouselItems[0].style.left =`${this.carouselNums * this.carouselWidth}PX`
       }
     },
     resetCarouse(type){
@@ -151,33 +208,64 @@ export default {
         endPos = 0
       } else {
         curIndex = this.carouselNums -1
-        endPos = curIndex * this.carouselWidth
+        endPos =  curIndex * this.carouselWidth
       }
-      this.el.style.transition = ''
+      this.cancelTransition()
       this.carouselItems[curIndex].style.left = `${endPos}px`
       this.currentIndex = type == 'start' ? 0 : this.carouselNums -1
-      this.dragState.startPos = endPos
-      translateUtil.translateElement(this.el, -endPos,null)
+      this.dragState.startPos = -endPos
+      this.translateElement(-endPos)
     },
     translateElement(position) {
       translateUtil.translateElement(this.el, position,null)
+    },
+    addTransition(){
+      this.el.style.transition = `all ${this.transDuration}s ease`
+    },
+    cancelTransition(){
+      this.el.style.transition = ''
     }
   },
 }
 </script>
 
 <style lang="less" scoped>
+@import '../../../src/style/default.less';
+
 .antv-carousel{
   overflow: hidden;
   cursor: pointer;
+  position: relative;
   &-wrap{
     position: relative;
     display: block;
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     height: 100%;
     cursor: inherit;
     box-sizing: border-box;
+  }
+  &-indicator{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    &-dot{
+      display: inline-block;
+      &>span{
+        display: block;
+        width: 8*@unit;
+        height: 8*@unit;
+        margin: 0 3*@unit;
+        border-radius: 50%;
+        background: #ccc;
+      }
+      &-active{
+        &>span{
+          background: #fff;
+        }
+      }
+    }
   }
 }
   
