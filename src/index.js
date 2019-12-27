@@ -17,11 +17,16 @@ import ImagePreview from '../packages/imagePreview/index'
 import SwipeAction from '../packages/swipeAction/index'
 import Carousel from '../packages/carousel/index'
 import CarouselItem from '../packages/carouselItem/index'
+import Tabbar from '../packages/tabbar/index'
+import Tabbartem from '../packages/tabbarItem/index'
+import Notice from '../packages/notice/index'
+
 // JS Components
 import Toast from '../packages/toast/index'
 import Modal from '../packages/modal/index'
 import ActionSheet from '../packages/actionSheet/index'
 
+import './style/reset.less'
 import './assets/icon/iconfont.css'
 
 const version = '0.1.0'
@@ -49,6 +54,9 @@ const install = function (Vue) {
   Vue.component(SwipeAction.name, SwipeAction)
   Vue.component(Carousel.name, Carousel)
   Vue.component(CarouselItem.name, CarouselItem)
+  Vue.component(Tabbar.name, Tabbar)
+  Vue.component(Tabbartem.name, Tabbartem)
+    Vue.component(Notice.name, Notice)
 
   Vue.$Toast = Vue.prototype.$Toast = Toast
   Vue.$Modal = Vue.prototype.$Modal = Modal
