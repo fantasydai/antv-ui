@@ -55,6 +55,9 @@ export default {
           name: '导航栏 Navbar',
           key: 'navbar'
         },{
+          name: '通告栏 Notice',
+          key: 'notice'
+        },{
           name: '选择器 Picker',
           key: 'picker'
         },{
@@ -75,6 +78,10 @@ export default {
         },{
           name: '提示 Toast',
           key: 'toast'
+        },
+        {
+          name: '标签栏 Tabbar',
+          key: 'tabbar'
         },
         
       ]

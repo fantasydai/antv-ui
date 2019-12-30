@@ -32,7 +32,7 @@
 </template>
 <script>
 export default {
-  name: 'antv-carousel-example',
+  name: 'Carousel',
   data(){
     return {
       imgs: [

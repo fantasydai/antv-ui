@@ -1,12 +1,12 @@
 <template>
-  <span :class="['d-badge',turning && 'd-badge-wrap']">
+  <span :class="['antv-badge',turning && 'antv-badge-wrap', !$slots.default && 'antv-badge-not-wrapper']">
     <slot></slot>
-    <sup :class="[dot && 'd-badge-dot',dot && size === 'large' &&'d-badge-dot-large',!dot && !turning && 'd-badge-text',turning && 'd-badge-turning',turning && size === 'large' && 'd-badge-turning-large']" :style="styles"> {{formatText}} </sup>
+    <sup :class="[dot && 'antv-badge-dot',dot && size === 'large' &&'antv-badge-dot-large',!dot && !turning && 'antv-badge-text',turning && 'antv-badge-turning',turning && size === 'large' && 'antv-badge-turning-large']" :style="styles"> {{formatText}} </sup>
   </span>
 </template>
 <script>
 export default {
-  name:'d-badge',
+  name:'antv-badge',
   props: {
     text: [String,Number],
     maxNumber:[String,Number],
@@ -41,7 +41,7 @@ export default {
 </script>
 <style lang="less" scoped>
 @import '../../../src/style/default.less';
-.d-badge{
+.antv-badge{
   position: relative;
   display: inline-block;
   line-height: 1;
@@ -49,10 +49,11 @@ export default {
   &-dot{
     position: absolute;
     z-index: 10;
-    right: -4* @unit;
     top: -4* @unit;
     height: 8*@unit;
     width: 8*@unit;
+    transform-origin: 0 center;
+    transform: translateX(-50%);
     border-radius: 100%;
     background: @color-badge;
   }
@@ -79,7 +80,8 @@ export default {
   &-text{
     top: auto;
     display: block;
-    position: relative;
+    position: absolute;
+    top: -6*@unit;
     height: @icon-size-xs;
     line-height: @icon-size-xs;
     min-width: @icon-size-xs / 2;
@@ -89,11 +91,23 @@ export default {
     font-size: @font-size-caption-sm;
     color: @color-text-base-inverse;
     background-color: @color-badge;
+    transform: translateX(-45%);
     white-space: nowrap;
     z-index: 10;
   }
+  &-not-wrapper{
+    .antv-badge-dot{
+
+    }
+    .antv-badge-text{
+      top: auto;
+      display: block;
+      position: relative;
+      transform: translateX(0);
+    }
+  }
 }
-.d-badge-wrap{
+.antv-badge-wrap{
   overflow: hidden;
 }
 </style>

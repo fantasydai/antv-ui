@@ -19,7 +19,7 @@ export default {
 <style lang="less" scoped>
 .demo-preivew-header-title{
   padding-top: 38px;
-  background: url(../../src/assets/images/tabbar.png) no-repeat;
+  background: url(../../src/assets/images/phone-header.png) no-repeat;
   background-size: 100% 40px;
   .navbar{
     background: #2E2E31;

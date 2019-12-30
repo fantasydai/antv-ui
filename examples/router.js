@@ -16,6 +16,10 @@ import Scroller from './pages/scroller.vue'
 import ImagePreview from './pages/imagePreview.vue'
 import SwipeAction from './pages/swipeAction.vue'
 import Carousel from './pages/carousel.vue'
+import Tabbar from './pages/tabbar.vue'
+import Notice from './pages/notice.vue'
+import Tabs from './pages/tabs.vue'
+
 import Modal from './pages/modal.vue'
 import ActionSheet from './pages/actionSheet.vue'
 
@@ -100,11 +104,22 @@ export default {
       path: '/swipeAction',
       name: 'SwipeAction',
       component: SwipeAction
-    },
-    {
-      path: '/Carousel',
-      name: 'carousel',
+    }, {
+      path: '/carousel',
+      name: 'Carousel',
       component: Carousel
+    }, {
+      path: '/tabbar',
+      name: 'Tabbar',
+      component: Tabbar
+    }, {
+      path: '/notice',
+      name: 'Notice',
+      component: Notice
+    }, {
+      path: '/tabs',
+      name: 'Tabs',
+      component: Tabs
     }
   ]
 }

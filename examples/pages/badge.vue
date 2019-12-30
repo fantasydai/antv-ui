@@ -2,34 +2,34 @@
   <section class="item-wrap">
     <List header="Badge">
       <ListItem class="list-item" >
-        <d-badge dot>
+        <antv-badge dot>
           <span :style="{ width: '26px', height: '26px', background: '#ddd', display: 'inline-block'}"></span>
-        </d-badge>
+        </antv-badge>
         <span style="marginLeft:12px">Dot badge</span>
       </ListItem>
       <ListItem class="list-item" title="Badge" :onClick="()=>{}" extra="customer" arrow="right">
         <span slot="extra">
-          <d-badge text="123" maxNumber="99">
-          </d-badge>
+          <antv-badge text="123" maxNumber="99">
+          </antv-badge>
           extra text
         </span>
 
       </ListItem>
       <ListItem class="list-item" :onClick="()=>{}" arrow="right">
         <span style="marginRight:12px">Custom</span>
-        <d-badge text="热门" :styles="{'background-color':'#ff5b05','border-radius':'4px'}">
-        </d-badge>
-        <d-badge text="new" :styles="{'background-color':'#f96268','border-radius':'0'}">
-        </d-badge>
-        <d-badge text="红包" :styles="{'background-color':'#fff',color:'#ed0a17',border:'1px solid #ed0a17','border-radius':'4px'}">
-        </d-badge>
-        <d-badge text="会员" :styles="{'background-color':'rgb(33, 182, 138)','border-radius':'4px'}">
-        </d-badge>
+        <antv-badge text="热门" :styles="{'margin-left': '10px', 'background-color':'#ff5b05','border-radius':'4px'}">
+        </antv-badge>
+        <antv-badge text="new" :styles="{'margin-left': '10px', 'background-color':'#f96268','border-radius':'0'}">
+        </antv-badge>
+        <antv-badge text="红包" :styles="{'margin-left': '10px', 'background-color':'#fff',color:'#ed0a17',border:'1px solid #ed0a17','border-radius':'4px'}">
+        </antv-badge>
+        <antv-badge text="会员" :styles="{'margin-left': '10px', 'background-color':'rgb(33, 182, 138)','border-radius':'4px'}">
+        </antv-badge>
       </ListItem>
        <ListItem class="list-item" arrow="right" :onClick="()=>{}">
-        <d-badge text="hot" turning>
+        <antv-badge text="hot" turning>
           <div class="turning"> turning badge</div>
-        </d-badge>
+        </antv-badge>
        </ListItem>
     </List>
   </section>

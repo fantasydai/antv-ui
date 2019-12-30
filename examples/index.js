@@ -6,7 +6,6 @@ import * as dui from '../src/index.js'
 import VueRouter from 'vue-router'
 import App from './app.vue'
 import Header from './components/component-title.vue'
-
 import './index.less'
 
 Vue.config.productionTip = false
