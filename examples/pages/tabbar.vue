@@ -73,7 +73,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .item-wrap{
   display: flex;
   flex-direction: column;

@@ -19,9 +19,11 @@ import Carousel from './pages/carousel.vue'
 import Tabbar from './pages/tabbar.vue'
 import Notice from './pages/notice.vue'
 import Tabs from './pages/tabs.vue'
+import Accordion from './pages/accordion.vue'
 
 import Modal from './pages/modal.vue'
 import ActionSheet from './pages/actionSheet.vue'
+import Lazyload from './pages/lazyload.vue'
 
 export default {
   routes: [
@@ -120,6 +122,15 @@ export default {
       path: '/tabs',
       name: 'Tabs',
       component: Tabs
+    }, {
+      path: '/lazyload',
+      name: 'Lazyload',
+      component: Lazyload
+    },
+    {
+      path: '/accordion',
+      name: 'Accordion',
+      component: Accordion
     }
   ]
 }

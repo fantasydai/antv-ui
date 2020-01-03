@@ -20,11 +20,12 @@ import CarouselItem from '../packages/carouselItem/index'
 import Tabbar from '../packages/tabbar/index'
 import Tabbartem from '../packages/tabbarItem/index'
 import Notice from '../packages/notice/index'
-
+import Accordion from '../packages/accordion/index'
 // JS Components
 import Toast from '../packages/toast/index'
 import Modal from '../packages/modal/index'
 import ActionSheet from '../packages/actionSheet/index'
+import Lazyload from '../packages/lazyload/index'
 
 import './style/reset.less'
 import './assets/icon/iconfont.css'
@@ -56,11 +57,14 @@ const install = function (Vue) {
   Vue.component(CarouselItem.name, CarouselItem)
   Vue.component(Tabbar.name, Tabbar)
   Vue.component(Tabbartem.name, Tabbartem)
-    Vue.component(Notice.name, Notice)
+  Vue.component(Notice.name, Notice)
+  Vue.component(Accordion.name, Accordion)
 
   Vue.$Toast = Vue.prototype.$Toast = Toast
   Vue.$Modal = Vue.prototype.$Modal = Modal
   Vue.$ActionSheet = Vue.prototype.$ActionSheet = ActionSheet
+
+  Vue.use(Lazyload, {attempt: 3})
 }
 if (typeof window !== 'undefined' && window.Vue) {
   install(window.Vue)
@@ -69,4 +73,5 @@ if (typeof window !== 'undefined' && window.Vue) {
 export {
   install,
   version,
+  Lazyload,
 }

@@ -49,6 +49,9 @@ export default {
           name: '列表 List',
           key: 'list'
         },{
+          name: 'LazyLoad',
+          key: 'lazyload'
+        },{
           name: '弹窗 Modal',
           key: 'modal'
         },{
